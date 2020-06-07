@@ -27,7 +27,7 @@
       background-color: white;
       margin-bottom: 10px;
       margin-top: 10px;
-      height: 700px;
+      height: 600px;
     }
 
     .nav-wrapper {
@@ -53,6 +53,7 @@
 
     #view {
       display: none;
+      color:black
     }
 
     .footer {
@@ -68,14 +69,13 @@
     }
     .inputs{
       display:flex;
+      margin:auto;
+      vertical-align: middle;
       height:500px;
     }
-    .inputs>form{
+    #toreg{
+      margin:auto;
       width:80%;
-      margin:auto
-    }
-    .inputs>div{
-      justify-content: center;
     }
   </style>
 </head>
@@ -92,20 +92,15 @@
       Register
     </div>
       <div class="row inputs">
-        <form method="POST" action="/login/register">
-          <div class="row">
-            <div class="input-field col s8 l8">
+        <form method="POST" id="toreg" action="/login/register">
+            <div class="input-field col s9 l9" >
               <input placeholder="사용자의 이름을 입력하세요" id="name" type="text" class="validate" name="username">
               <label for="Name">이름</label>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col l8 s8">
+            <div class="input-field col l9 s9">
               <input placeholder="사용하실 아이디를 입력하세요" id="id" type="text" class="validate" name="userid">
               <label for="ID">ID</label>
             </div>
-          </div>
-          <div class="row">
             <div class="input-field col l9 s9">
               <input id="password" type="password" class="validate" value="" name="userpassword">
               <label for="Password">사용하실 비밀번호를 입력하세요(8글자 이상)</label>
@@ -113,8 +108,6 @@
             <div class="col l3 input-field s3">
               <i class='material-icons' id="view">remove_red_eye</i>
             </div>
-          </div>
-          <div class="row">
             <div class="input-field col l9 s9">
               <input id="email" type="email" class="validate" name="useraddress">
               <label for="Email">이메일 주소를 입력하세요</label>
@@ -129,18 +122,15 @@
                 <option value="alone">직접입력</option>
               </select>
             </div>
-          </div>
           <div class="row">
-            <div class="input-field col l12 s12">
+            <div class="input-field col l9 s9">
               <input placeholder="사용자의 전화번호를 입력하세요" id="tel" type="text" class="validate" name="usertel">
               <label for="Tel">전화번호</label>
             </div>
-            <div class="row">
-              <div class="input-field col s12 l12">
+              <div class="input-field col s12 l12 center">
                 <a class="waves-effect waves-light btn-small card-panel blue accent-2" href="/ViLock">뒤로가기</a>
                 <button class="waves-effect waves-light btn-small card-panel red accent-2" id="register" type="submit">회원가입</button>
               </div>
-            </div>
           </div>
         </form>
       </div>

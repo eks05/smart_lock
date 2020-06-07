@@ -33,30 +33,30 @@ router
     let open = req.body.servo
     let hidepassword = req.body.hidepassword
 
-    // User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
-    //   let svpw = user.openpassword
-    //   if (svpw == hidepassword) {
-    //     var PiServo = require('pi-servo')
-    //     // pass the GPIO number
-    //     var sv1 = new PiServo(18)
-    //     sv1.open().then(function () {
-    //       sv1.setDegree(0); // 0 - 180
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
+    User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
+      let svpw = user.openpassword
+      if (svpw == hidepassword) {
+        var PiServo = require('pi-servo')
+        // pass the GPIO number
+        var sv1 = new PiServo(18)
+        sv1.open().then(function () {
+          sv1.setDegree(0); // 0 - 180
+        })
+        .catch(err => {
+          console.log(err)
+        })
 
-    //     setTimeout(() => {
-    //       sv1.setDegree(180)
-    //     }, 5000);
-    //   }
-    //   else {
-    //     res.redirect('/Login')
-    //   }
-    //   setTimeout(() => {
-    //     res.redirect('/U-ViLock')
-    //   }, 6000);
-    // })
+        setTimeout(() => {
+          sv1.setDegree(180)
+        }, 5000);
+      }
+      else {
+        res.redirect('/Login')
+      }
+      setTimeout(() => {
+        res.redirect('/U-ViLock')
+      }, 6000);
+    })
   })
 
 

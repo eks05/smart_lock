@@ -103,14 +103,17 @@
         .btn:hover {
             background-color: #AAABD3;
         }
+        .btn:active{
+            background-color: #AAABD3;
+        }
 
-        #check-fv,
-        #check-sv,
-        #check-tv {
+        #check-f,
+        #check-s,
+        #check-t {
             float: right;
         }
 
-        .check-video {
+        .check-img {
             height: 270px;
             width: 80%;
             margin: auto;
@@ -148,7 +151,7 @@
         #video {
             width: 80%;
             border: 1px solid black;
-            height: 300px;
+            height: 400px;
             margin: auto;
             margin-bottom: 50px;
             margin-top: 50px;
@@ -263,9 +266,9 @@
                             <img src="/public/images/그리스.jpg" width="100%" , height="100%">
                         </div>
                         <a><img class="circle" alt="프로필" src=<%= profile %> ></a>
-                        <a><span class="white-text name"></span></a>
-                        <a><span class="white-text email"></span></a>
-                    </div>
+                        <a><span class="white-text name"><%= id %></span></a>
+                        <a><span class="white-text email"><%= address%></span></a>
+                    </div> 
                 </li>
                 <li><a class='waves-effect'>프로필사진변경</a></li>
                 <li class="filebox">
@@ -363,28 +366,27 @@
                     <button type="submit" class='btn'>버튼</button>
                 </form>
             </div>
-            <table class="check-video">
+            <table class="check-img">
                 <tr class="view-more">
                     <th id="time"></th>
-                    <td id="plus"><a class="btn-floating waves-effect waves-light btn" href="#!"><i
+                    <td id="plus"><a class="btn-floating waves-effect btn" href="#!"><i
                                 class="material-icons">add</i></a></td>
                 </tr>
-                <!-- 영상 정보(시간) -->
                 <tr>
                     <td id="first-video">시간</td>
-                    <td><a class="waves-effect waves-teal btn" id="check-fv">영상 확인하기</a></td>
+                    <td><a class="waves-effect btn" id="check-f">사진 확인하기</a></td>
                 </tr>
                 <tr>
                     <td id="second-video">시간</td>
-                    <td><a class="waves-effect waves-teal btn" id="check-sv">영상 확인하기</a></td>
+                    <td><a class="waves-effect btn" id="check-s">사진 확인하기</a></td>
                 </tr>
                 <tr>
                     <td id="third-video">시간</td>
-                    <td><a class="waves-effect waves-teal btn" id="check-tv">영상 확인하기</a></td>
+                    <td><a class="waves-effect btn" id="check-t">사진 확인하기</a></td>
                 </tr>
             </table>
 
-            <div id='chart'><canvas id="myChart"></canvas></div>
+            <!-- <div id='chart'><canvas id="myChart"></canvas></div> -->
 
             <div id="video">
                 <img src="" id="video_src">
@@ -406,7 +408,7 @@
         let date = new Date()
         today_date.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일'
         let time = document.getElementById('time')
-        time.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일' + ' ' + '영상확인'
+        time.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일' + ' ' + '사진확인'
         $(document).ready(function () {
             $('.sidenav').sidenav();
         });
@@ -474,32 +476,32 @@
 
 
         //chart
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-            // The data for our dataset
-            data: {
-                labels: ['5시간전', '4시간전', '3시간전', '2시간전', '1시간전'],
-                datasets: [{
-                    label: '현관문의 흔들림',
-                    borderColor: '#353866',
-                    backgroundColor: '#AAABD3',
-                    pointBackgroundColor: '#353866',
-                    lineTension: 0.1,
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }, ]
-            },
+        // var ctx = document.getElementById('myChart').getContext('2d');
+        // var chart = new Chart(ctx, {
+        //     // The type of chart we want to create
+        //     type: 'line',
+        //     // The data for our dataset
+        //     data: {
+        //         labels: ['5시간전', '4시간전', '3시간전', '2시간전', '1시간전'],
+        //         datasets: [{
+        //             label: '현관문의 흔들림',
+        //             borderColor: '#353866',
+        //             backgroundColor: '#AAABD3',
+        //             pointBackgroundColor: '#353866',
+        //             lineTension: 0.1,
+        //             data: [0, 10, 5, 2, 20, 30, 45],
+        //         }, ]
+        //     },
 
 
-            // Configuration options go here
-            options: {
-                title: {
-                    display: true,
-                    text: '우리집이 안전한가?'
-                },
-            }
-        });
+        //     // Configuration options go here
+        //     options: {
+        //         title: {
+        //             display: true,
+        //             text: '우리집이 안전한가?'
+        //         },
+        //     }
+        // });
 
         //작동 정지 
         let key = document.getElementById('key')
@@ -534,17 +536,18 @@
 
 
         //녹화된 영상 송출
-        document.getElementById('check-fv').addEventListener('click', first_video)
+        document.getElementById('check-f').addEventListener('click', first_video)
 
         function first_video() {
-            document.getElementById('video').scrollIntoView()
+            let check_img = document.querySelector('.check-img')
+            check_img.style.display = 'none'
         }
-        document.getElementById('check-sv').addEventListener('click', second_video)
+        document.getElementById('check-s').addEventListener('click', second_video)
 
         function second_video() {
             document.getElementById('video').scrollIntoView()
         }
-        document.getElementById('check-tv').addEventListener('click', third_video)
+        document.getElementById('check-t').addEventListener('click', third_video)
 
         function third_video() {
             document.getElementById('video').scrollIntoView()
@@ -567,6 +570,9 @@
             document.getElementById('video').scrollIntoView()
             video.setAttribute('src', 'http://192.168.0.24:8091/?action=stream')
         }
+        video.addEventListener('click', ()=>{
+            video.removeAttribute('src')
+        })
 
         let get = document.getElementById('getattribute')
 

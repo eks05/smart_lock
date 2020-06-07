@@ -6,6 +6,9 @@ const logger = require('morgan')
 const db = require('./models/db')
 const User = require('./models/User')
 
+// const vib = require('./sensor/vib')
+const hc_sr04 = require('./sensor/hc-sr')
+
 const multer  = require('multer')
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -57,8 +60,8 @@ app.get('/U-ViLock',(req, res)=>{
       let profile = files[index]
       console.log(profile)
       res.render('User-main-page',{
-        // id : req.cookies.Info.id,
-        // address : req.cookies.Info.address,
+        id : req.cookies.Info.id,
+        address : req.cookies.Info.address,
         profile : 'uploads/' + profile
     })
   })
@@ -71,7 +74,7 @@ app.get('/login', (req, res)=>{
 })
 
 
-app.listen(3000,()=>{
+app.listen(3001,()=>{
   console.log('running')
   db()
 })
