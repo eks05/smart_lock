@@ -25,7 +25,7 @@ router
     Info.save()
     
     console.log(password)
-    res.redirect('/register')
+    res.redirect('/Login')
   })
 
   .post('/checkIn', (req, res) => {

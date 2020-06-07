@@ -19,37 +19,43 @@ const User = require('../models/User')
 
 router
   .post('/foropen', (req, res) => {
-    User.findOne({ userid: req.cookies.Info.id }, (req, res) => {
+    User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
       if (err) return res.json(err)
-      if (userid == req.cookies.Info.id) {
-        User.update({ userid: req.cookies.Info.id }, { $set: { openpassword: req.body.foropen } })
+      if (user.userid == req.cookies.Info.id) {
+        User.findOneAndUpdate({userid: req.cookies.Info.id },{ openpassword: req.body.foropen }, ()=>{
+          console.log(user)
+          res.redirect('/U-ViLock')
+        })
       }
     })
   })
   .post('/password', (req, res) => {
-    // let open = req.body.servo
+    let open = req.body.servo
     let hidepassword = req.body.hidepassword
-    let password = req.body.password
 
-    // User.findOne({ userid: req.cookies.Info.id }, (req, res) => {
-      if (true) {
-        var PiServo = require('pi-servo')
-        // pass the GPIO number
-        var sv1 = new PiServo(18)
-        sv1.open().then(function () {
-          sv1.setDegree(0); // 0 - 180
-        })
+    // User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
+    //   let svpw = user.openpassword
+    //   if (svpw == hidepassword) {
+    //     var PiServo = require('pi-servo')
+    //     // pass the GPIO number
+    //     var sv1 = new PiServo(18)
+    //     sv1.open().then(function () {
+    //       sv1.setDegree(0); // 0 - 180
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
 
-        setTimeout(() => {
-          sv1.setDegree(180)
-        }, 5000);
-      }
-      else {
-        res.redirect('/Login')
-      }
-      setTimeout(() => {
-        res.redirect('/U-ViLock')
-      }, 6000);
+    //     setTimeout(() => {
+    //       sv1.setDegree(180)
+    //     }, 5000);
+    //   }
+    //   else {
+    //     res.redirect('/Login')
+    //   }
+    //   setTimeout(() => {
+    //     res.redirect('/U-ViLock')
+    //   }, 6000);
     // })
   })
 
