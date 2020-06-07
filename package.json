@@ -1,0 +1,35 @@
+{
+  "name": "lock",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "crypto-js": "^4.0.0",
+    "debug": "~2.6.9",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "flash": "^1.1.0",
+    "fs": "0.0.1-security",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "module": "^1.2.5",
+    "mongoose": "^4.13.20",
+    "morgan": "^1.10.0",
+    "mplayer": "^2.1.0",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pi-servo": "^1.0.2",
+    "pn532": "^1.0.0",
+    "serialport": "^9.0.0",
+    "xhr": "^2.5.0"
+  }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%
+        }
+
+        .nav-wrapper {
+            font-family: 'Song Myung', sans-serif;
+            padding: 2px;
+            height: 200px;
+            background-color: #353866;
+        }
+
+        .main {
+            width: 90%;
+            margin: auto;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            height: 500px;
+            text-align: center;
+        }
+
+        .title {
+            text-align: center;
+            margin: 20px;
+            font-weight: bold;
+            font-size: 35px;
+            border-bottom: 1px solid black;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .inputs {
+            width: 80%;
+            margin: auto;
+            vertical-align: middle;
+            height:400px;
+            display:flex;
+        }
+        .inputs>div{
+            justify-content: center;
+        }
+
+        .footer {
+            height: 130px;
+            border-top: 1px solid black;
+            text-align: center;
+            padding: 40px
+        }
+
+        #view:hover {
+            cursor: pointer;
+        }
+
+        #inform {
+            font-size: 13px;
+        }
+        #Tologin{
+            margin:auto;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/G-ViLock" class="brand-logo center">VILOCK</a>
+        </div>
+    </nav>
+    <div class="main">
+        <div class="title">
+            Login
+        </div>
+        <div class="row inputs my-wrapper valign-wrapper center-align">
+            <form id="Tologin" class="col s8 l8" method="POST" action="/login/checkIn">
+                    <div class="input-field">
+                        <input placeholder="아이디를 입력하세요" id="ID" type="text" class="validate" name="userid">
+                        <label for="ID">ID</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="password" type="password" class="validate" name="userpassword">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-field">
+                        <i class='small material-icons' id="view">remove_red_eye</i>
+                    </div>
+                <a class="waves-effect waves-light btn-small card-panel blue accent-2" id="register"
+                    href="/register">회원가입</a>
+                <button class="waves-effect waves-light btn-small card-panel red accent-2" id="register" type="submit">로그인</button>
+                <div id="inform">아직 회원가입 하지않으셨다면 회원가입버튼을 눌러주세요</div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row">
+            당신의 삶을 편리하게! <br>
+            스마트 도어락에 관한 모든 문의사항은 송호중학교 3학년 김은교에게 문의주시기 바랍니다. <br>
+            tel : 010 - 4580 - 5306 , Email : eungyo307@naver.com / eungyo307@gmail.com
+        </div>
+    </div>
+
+    <script>
+        let passwordinput = document.getElementById('password')
+        passwordinput.addEventListener('click', show)
+        let viewpassword = document.getElementById('view')
+
+        function show() {
+            viewpassword.style.display = "block"
+        }
+        viewpassword.addEventListener('click', view)
+
+        function view() {
+            passwordinput.removeAttribute('type')
+            setTimeout(() => {
+                passwordinput.setAttribute('type', 'password')
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

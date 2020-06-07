@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+  <!-- favicon -->
+  <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../public/images/favicon.ico" type="image/x-icon">
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- js -->
+  <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    .main {
+      width: 80%;
+      margin: auto;
+      background-color: white;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      height: 700px;
+    }
+
+    .nav-wrapper {
+      font-family: 'Song Myung', sans-serif;
+      padding: 2px;
+      height: 200px;
+      background-color: #353866;
+    }
+
+    .title {
+      text-align: center;
+      margin: 20px;
+      font-weight: bold;
+      font-size: 30px;
+      border-bottom: 1px solid black;
+      font-family: 'Lato', sans-serif;
+      color: black;
+    }
+
+    #view:hover {
+      cursor: pointer;
+    }
+
+    #view {
+      display: none;
+    }
+
+    .footer {
+      height: 130px;
+      border-top: 1px solid black;
+      text-align: center;
+      padding: 40px
+    }
+
+    .btn {
+      background-color: #AAABD3;
+      font-weight: bold;
+    }
+    .inputs{
+      display:flex;
+      height:500px;
+    }
+    .inputs>form{
+      width:80%;
+      margin:auto
+    }
+    .inputs>div{
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/G-ViLock" class="brand-logo center">VILOCK<a>
+          </ul>
+    </div>
+  </nav>
+  <div class="main">
+    <div class="title">
+      Register
+    </div>
+      <div class="row inputs">
+        <form method="POST" action="/login/register">
+          <div class="row">
+            <div class="input-field col s8 l8">
+              <input placeholder="사용자의 이름을 입력하세요" id="name" type="text" class="validate" name="username">
+              <label for="Name">이름</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col l8 s8">
+              <input placeholder="사용하실 아이디를 입력하세요" id="id" type="text" class="validate" name="userid">
+              <label for="ID">ID</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col l9 s9">
+              <input id="password" type="password" class="validate" value="" name="userpassword">
+              <label for="Password">사용하실 비밀번호를 입력하세요(8글자 이상)</label>
+            </div>
+            <div class="col l3 input-field s3">
+              <i class='material-icons' id="view">remove_red_eye</i>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col l9 s9">
+              <input id="email" type="email" class="validate" name="useraddress">
+              <label for="Email">이메일 주소를 입력하세요</label>
+            </div>
+            <div class="input-field col l3 s3" style="display: flex;">
+              <!-- <label>Browser Select</label> -->
+              <select class="browser-default" id='address'>
+                <option value="" disabled selected>이메일</option>
+                <option value="naver.com">@naver.com</option>
+                <option value="hanmail.net">@hanmail.net</option>
+                <option value="gamil.com">@gmail.com</option>
+                <option value="alone">직접입력</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col l12 s12">
+              <input placeholder="사용자의 전화번호를 입력하세요" id="tel" type="text" class="validate" name="usertel">
+              <label for="Tel">전화번호</label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 l12">
+                <a class="waves-effect waves-light btn-small card-panel blue accent-2" href="/ViLock">뒤로가기</a>
+                <button class="waves-effect waves-light btn-small card-panel red accent-2" id="register" type="submit">회원가입</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+  <div class="footer">
+    당신의 삶을 편리하게! <br>
+    스마트 도어락에 관한 모든 문의사항은 송호중학교 3학년 김은교에게 문의주시기 바랍니다. <br>
+    tel : 010 - 4580 - 5306 , Email : eungyo307@naver.com / eungyo307@gmail.com
+  </div>
+  <script>
+    //비밀번호 보여주는 부분
+    let passwordinput = document.getElementById('password')
+    passwordinput.addEventListener('click', show)
+    let viewpassword = document.getElementById('view')
+
+    function show() {
+      viewpassword.style.display = "block"
+    }
+    viewpassword.addEventListener('click', view)
+
+    function view() {
+      passwordinput.removeAttribute('type')
+      setTimeout(() => {
+        passwordinput.setAttribute('type', 'password')
+      }, 2000);
+    }
+    let address = document.getElementById('address')
+    address.addEventListener('change', write)
+
+    function write() {
+      if (address.value == "alone") {
+        address.style.display = "none"
+      } else {
+        let email = document.getElementById('email')
+        let email_v = email.value
+        email.value = email_v + '@' + address.value
+      }
+    }
+    //회원가입 버튼클릭
+    let register_btn = document.getElementById('register')
+    register_btn.addEventListener('click', register)
+
+    function register() {
+      let name = document.getElementById('name')
+      let id = document.getElementById('id')
+      let password = document.getElementById('password')
+      let email = document.getElementById('email')
+      let tel = document.getElementById('tel')
+      let Info = [name, id, password, email, tel]
+      if (password.value.length <= 7) {
+        password.nextElementSibling.style.color = 'red'
+        alert('비밀번호를 8자리 이상으로 다시 수정해주세요')
+      }
+      if (name.value == "" || id.value == "" || password.value == "" || email.value == "" || tel.value == "") {
+        let emptyInfo = []
+        for (let i = 0; i < 5; i++) {
+          if (Info[i].value == "") {
+            emptyInfo.push(Info[i].nextElementSibling.getAttribute('for'))
+            Info[i].nextElementSibling.style.color = 'red'
+          }
+        }
+        for (let i = 0; i < emptyInfo.length; i++) {
+          if (emptyInfo[i] == 'Name') {
+            emptyInfo.splice(i, 1, "이름")
+          }
+          if (emptyInfo[i] == 'ID') {
+            emptyInfo.splice(i, 1, "아이디")
+          }
+          if (emptyInfo[i] == 'Password') {
+            emptyInfo.splice(i, 1, "비밀번호")
+          }
+          if (emptyInfo[i] == 'Email') {
+            emptyInfo.splice(i, 1, "이메일")
+          }
+          if (emptyInfo[i] == 'Tel') {
+            emptyInfo.splice(i, 1, "전화번호")
+          }
+        }
+        alert(emptyInfo + " " + "정보를 다시 채워주시기 바랍니다")
+      } else {
+        let user_Info = {
+          name: name.value,
+          id: id.value,
+          password: password.value,
+          email: email.value,
+          tel: tel.value
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

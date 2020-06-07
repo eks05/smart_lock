@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
+    <!-- icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- js -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-wrapper {
+            font-family: 'Song Myung', sans-serif;
+            padding: 2px;
+            height: 200px;
+            background-color: #353866;
+        }
+
+        .m-left {
+            height: 100%;
+        }
+
+        .notice {
+            background-color: #ffee58;
+            height: 40px;
+            border: 2px dashed black;
+            padding: 5px;
+            text-align: center;
+            display: flex;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .notice:hover {
+            color: red;
+            cursor: pointer;
+        }
+
+        .weather {
+            margin-bottom: 10px;
+        }
+
+        #today-date {
+            text-align: center;
+            font-size: 14px;
+
+        }
+
+        #t-tem,
+        #t-humidity,
+        #t-img {
+            width: 30%;
+            text-align: center;
+        }
+
+        .Info {
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+            color: black;
+        }
+
+        .view-more {
+            background-color: #353866;
+            color: white
+        }
+
+        #source {
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .btn,
+        .etc {
+            background-color: #AAABD3;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #AAABD3;
+        }
+
+        #check-fv,
+        #check-sv,
+        #check-tv {
+            float: right;
+        }
+
+        .check-video {
+            height: 270px;
+            width: 80%;
+            margin: auto;
+            margin-bottom: 50px;
+            padding: 5px;
+        }
+
+        #plus {
+            float: right;
+        }
+
+        #time {
+            font-size: 20px;
+        }
+
+        .guest {
+            text-align: center;
+            line-height: 25px;
+        }
+
+        #cloth-img {
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 30px;
+        }
+
+
+        .footer {
+            height: 130px;
+            border-top: 1px solid black;
+            text-align: center;
+            padding: 40px
+        }
+
+        #video {
+            width: 80%;
+            border: 1px solid black;
+            height: 300px;
+            margin: auto;
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
+        #chart {
+            width: 80%;
+            margin: auto;
+        }
+
+        .m-right {
+            border-left: 1px solid black;
+        }
+
+        .greet {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            font-family: '굴림';
+            margin-bottom: 50px;
+        }
+
+        .open-switch {
+            text-align: center;
+            width: 80%;
+            margin: auto;
+            margin-bottom: 50px;
+        }
+
+        #open-btn{
+            padding:10;
+            background-color: white;
+            border-style: none;
+        }
+
+        .stop {
+            height: 100px;
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        #face {
+            border-radius: 80%;
+            border: 1px solid black;
+            width:60px;
+        }
+
+        .sidenav {
+            font-family: 'Nanum Myeongjo', serif;
+        }
+
+        .filebox label {
+            display: inline-block;
+            text-align: center;
+            color: white;
+            font-size: inherit;
+            line-height: normal;
+            vertical-align: middle;
+            background-color: #AAABD3;
+            cursor: pointer;
+            border-bottom-color: #e2e2e2;
+            padding: 10px;
+            width:70px;
+            height:40px;
+        }
+
+        .filebox input[type="file"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .profile {
+            background-color: #AAABD3;
+            border: 1px solid #ebebeb;
+            width:70px;
+            color:white;
+            height:40px;
+        }
+        .profile:active{
+            background-color: #AAABD3;
+        }
+        #hidepassword, #svpassword {
+            text-align: center;
+        }
+        #video_src{
+            width:100%;
+            height:100%;
+        }
+        #check-password, #foropen{
+            display:none
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 타이틀 -->
+    <nav>
+        <div class="nav-wrapper">
+            <img alt="프로필" id="face" data-target="slide-out" class="sidenav-trigger" src=<%= profile %>>
+            <!-- 사이드바 -->
+            <ul id="slide-out" class="sidenav white">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="/public/images/그리스.jpg" width="100%" , height="100%">
+                        </div>
+                        <a><img class="circle" alt="프로필" src=<%= profile %> ></a>
+                        <a><span class="white-text name"></span></a>
+                        <a><span class="white-text email"></span></a>
+                    </div>
+                </li>
+                <li><a class='waves-effect'>프로필사진변경</a></li>
+                <li class="filebox">
+                    <form action="/profile" method="POST"class='center' enctype="multipart/form-data">
+                        <label for="ex_file">변경</label>
+                        <input type="file" class='waves-effect' id="ex_file" name='profile' oninput="sendattribute()">
+                        <button id="getattribute" class="profile">확인</button>
+                    </form>
+                </li>
+                <li><a class='waves-effect'>지문등록</a></li>
+                <li><a class='waves-effect'>NFC 카드등록</a></li>
+                <li class="row">
+                    <a class='waves-effect' id="save-password">비밀번호 설정</a>
+                    <form action="/open/foropen" method="POST" id="foropen">
+                        <input type="text" id="svpassword" name="foropen" class="input-field col s8 l8" placeholder="비밀번호를 입력하세요">
+                        <button type="submit" class='btn col s4 l4'>버튼</button>
+                    </form>
+                </li>
+            </ul>
+            <a href="/U-ViLock" class="brand-logo center">VILOCK</a>
+        </div>
+    </nav>
+
+    <!-- 경고창 -->
+    <div class="notice">
+        <img src="/public/images/사이렌.jpg" height="100%" alt="" class='siraen'>
+        <marquee direction="right" scrollamount="10">
+            <i class="material-icons">sentiment_very_satisfied</i>
+            <i class="material-icons">sentiment_very_dissatisfied</i>
+            <<--실시간 영상 확인하기-->>
+                <i class="material-icons">sentiment_very_dissatisfied</i>
+                <i class="material-icons">sentiment_very_satisfied</i>
+        </marquee>
+        <img src="/public/images/사이렌.jpg" height="100%" alt="" class='siraen'>
+
+    </div>
+
+    <!-- 좌측열 -->
+    <div class="row">
+        <div class="m-left col l2 hide-on-med-and-down">
+            <!-- 날씨 -->
+            <span class="Info">오늘의 날씨 <span id="source">Open Weather Map</span></span>
+            <table class="weather">
+                <tr>
+                    <th id="today-date" colspan="3"></th>
+                </tr>
+                <tr>
+                    <th>기온</th>
+                    <td id="t-tem"></td>
+                    <td id='t-img'>
+                        <img src="" alt="" id="w-img">
+                    </td>
+                </tr>
+                <tr>
+                    <th>습도</th>
+                    <td id="t-humidity" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td id='cloth-img' colspan="3">
+                    </td>
+                </tr>
+            </table>
+            <!-- 손님 확인 -->
+            <div class="guest">우리집에 누가 가장많이왔을까? <br> 궁금하지 않아? <br>
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">당연하지</a>
+            </div>
+            <div id="modal1" class="modal bottom-sheet">
+                <div class="modal-content">
+                    <h4>과연 우리집에 누가 많이왔을까?</h4>
+                    <table>
+                        <tr>
+                            <template>
+                                <td>
+                                    <img src="" alt="" id="user_profile">
+                                </td>
+                                <td>
+                                    <span id="name"></span>
+                                    <span id="email"></span>
+                                    <span id="phone_number"></span>
+                                </td>
+                            </template>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col l10 m-right s12">
+            <div class="greet">
+                실적물 제작 의도 작성공간
+            </div>
+            <div class="open-switch">
+                <button id="open-btn" name="servo" value="on" ><img src="../public/images/전원버튼.png" alt=""></button>
+                <form action="/open/password" method="POST" id="check-password">
+                    <input type="text" id="hidepassword" name="hidepassword" class="input-field col s8 l8" placeholder="비밀번호를 입력하세요">
+                    <button type="submit" class='btn'>버튼</button>
+                </form>
+            </div>
+            <table class="check-video">
+                <tr class="view-more">
+                    <th id="time"></th>
+                    <td id="plus"><a class="btn-floating waves-effect waves-light btn" href="#!"><i
+                                class="material-icons">add</i></a></td>
+                </tr>
+                <!-- 영상 정보(시간) -->
+                <tr>
+                    <td id="first-video">시간</td>
+                    <td><a class="waves-effect waves-teal btn" id="check-fv">영상 확인하기</a></td>
+                </tr>
+                <tr>
+                    <td id="second-video">시간</td>
+                    <td><a class="waves-effect waves-teal btn" id="check-sv">영상 확인하기</a></td>
+                </tr>
+                <tr>
+                    <td id="third-video">시간</td>
+                    <td><a class="waves-effect waves-teal btn" id="check-tv">영상 확인하기</a></td>
+                </tr>
+            </table>
+
+            <div id='chart'><canvas id="myChart"></canvas></div>
+
+            <div id="video">
+                <img src="" id="video_src">
+            </div>
+            <div class="stop">
+                <img src="../public/images/자물쇠.png" alt="yee" width="100px" id="key">
+            </div>
+            <!-- 바닥 -->
+            <div class="footer">
+                당신의 삶을 편리하게! <br>
+                스마트 도어락에 관한 모든 문의사항은 송호중학교 3학년 김은교에게 문의주시기 바랍니다. <br>
+                Tel : 010 - 4580 - 5306 , Email : eungyo307@naver.com / eungyo307@gmail.com
+            </div>
+        </div>
+    </div>
+    <script>
+        let today_date = document.getElementById("today-date")
+        let t_humidity = document.getElementById('t-humidity')
+        let date = new Date()
+        today_date.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일'
+        let time = document.getElementById('time')
+        time.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일' + ' ' + '영상확인'
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+        window.onload = weather()
+
+        function weather() {
+            let xhr = new XMLHttpRequest()
+
+            xhr.open('GET',
+                'https://api.openweathermap.org/data/2.5/weather?q=Ansan&appid=894ed0de092608f164b8f5e50e7f09d3')
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let data = xhr.responseText
+                    data = JSON.parse(data)
+                    let temp = data.main.temp - 273.15
+                    temp = temp.toFixed(1)
+                    let t_tem = document.getElementById('t-tem')
+                    t_tem.innerHTML = temp + ' ' + '°C'
+                    t_humidity.innerHTML = data.main.humidity + '%'
+                    let cloth_img = document.getElementById('cloth-img')
+                    //기온별 옷차림
+                    if (temp <= 4) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(4도).jpg')"
+                    } else if (temp > 4 && temp <= 8.9) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(5-8도).jpg')"
+                    } else if (temp >= 9 && temp <= 11.9) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(9-11도).jpg')"
+                    } else if (temp >= 12 && temp <= 16.9) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(12-16도).jpg')"
+                    } else if (temp >= 17 && temp <= 19.9) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(17-19도).jpg')"
+                    } else if (temp >= 20 && temp <= 22.5) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(20-22도).jpg')"
+                    } else if (temp >= 22.6 && temp <= 27.9) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(23-27도).jpg')"
+                    } else if (temp >= 28) {
+                        cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(28도).jpg')"
+                    } //기온별 옷차림
+                    //날씨 이모티콘
+                    let w_img = document.getElementById('w-img')
+                    if (data.weather[0].description == "clear sky") {
+                        let img = "../public/images/화창.jpg"
+                        w_img.setAttribute('src', img)
+                    } else if (data.weather[0].description == "rain") {
+                        let img = "../public/images/비.jpg"
+                        w_img.setAttribute('src', img)
+                    } else if (data.weather[0].description == "snow") {
+                        let img = "../public/images/눈.jpg"
+                        w_img.setAttribute('src', img)
+                    } else if (data.weather[0].description == "scattered clouds") {
+                        let img = "../public/images/구름.jpg"
+                        w_img.setAttribute('src', img)
+                    } else {
+                        $('#t-img').remove()
+                    }
+                }
+            }
+            xhr.send()
+        }
+
+        //손님 찾아보기
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+
+
+        //chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+            // The data for our dataset
+            data: {
+                labels: ['5시간전', '4시간전', '3시간전', '2시간전', '1시간전'],
+                datasets: [{
+                    label: '현관문의 흔들림',
+                    borderColor: '#353866',
+                    backgroundColor: '#AAABD3',
+                    pointBackgroundColor: '#353866',
+                    lineTension: 0.1,
+                    data: [0, 10, 5, 2, 20, 30, 45],
+                }, ]
+            },
+
+
+            // Configuration options go here
+            options: {
+                title: {
+                    display: true,
+                    text: '우리집이 안전한가?'
+                },
+            }
+        });
+
+        //작동 정지 
+        let key = document.getElementById('key')
+        key.addEventListener('click', warning)
+
+        function warning() {
+            alert('도어락 정지를하면 비밀번호를 입력해도 문이 열리지 않습니다.\n이는 무조건 지문이나 NFC카드로 다시 가동시킬 수 있습니다')
+            let agree = prompt('동의하신다면 "동의" 라고 적어주세요')
+            if (agree === '동의') {
+                alert('가동을 정지하겠습니다')
+            } else {
+                alert('가동을 계속합니다')
+            }
+        }
+
+        //경보창
+        let siraen = document.querySelectorAll('.siraen')
+
+        function change_img() {
+            for (let i = 0; i < 2; i++) {
+                siraen[i].removeAttribute('src')
+                siraen[i].setAttribute('src', '/public/images/사이렌2.jpg')
+                setTimeout(() => {
+                    siraen[i].removeAttribute('src')
+                    siraen[i].setAttribute('src', '/public/images/사이렌.jpg')
+                }, 250);
+            }
+        }
+        setInterval(() => {
+            change_img()
+        }, 500);
+
+
+        //녹화된 영상 송출
+        document.getElementById('check-fv').addEventListener('click', first_video)
+
+        function first_video() {
+            document.getElementById('video').scrollIntoView()
+        }
+        document.getElementById('check-sv').addEventListener('click', second_video)
+
+        function second_video() {
+            document.getElementById('video').scrollIntoView()
+        }
+        document.getElementById('check-tv').addEventListener('click', third_video)
+
+        function third_video() {
+            document.getElementById('video').scrollIntoView()
+        }
+
+        //사진 더보기
+        let plus = document.getElementById('plus')
+        plus.addEventListener('click', more_img)
+
+        function more_img() {
+            alert() //하루동안 진동으로 인해 촬영된 이미지
+        }
+
+        //영상 실시간 송출   
+        let video = document.getElementById('video_src')
+        let notice = document.querySelector('.notice')
+        notice.addEventListener('click', src)
+
+        function src() {
+            document.getElementById('video').scrollIntoView()
+            video.setAttribute('src', 'http://192.168.0.24:8091/?action=stream')
+        }
+
+        let get = document.getElementById('getattribute')
+
+        function sendattribute(){
+            get.setAttribute('type', 'submit')
+        }
+        let openbtn = document.getElementById('open-btn')
+        openbtn.addEventListener('click', check)
+        let pw2 = document.getElementById('pw2')
+        function check(){
+            let check_password = document.getElementById('check-password')
+            check_password.style.display = "block"
+            openbtn.style.display = "none"
+        }
+
+        let save_password = document.getElementById('save-password')
+        save_password.addEventListener('click', save)
+        function save(){  
+            let foropen = document.getElementById('foropen')
+            foropen.style.display = "block"
+            save_password.style.display ="none"
+        }
+    </script>
+</body>
+
+</html>
