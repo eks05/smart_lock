@@ -1,31 +1,46 @@
-const path = require("path");
-const PIGPIO = require("pigpio");
-const db = require('./models/db')
-const User = require('./models/User')
-const fs = require('fs')
+const Gpio = require("pigpio").Gpio;
+const VibModel = require('../models/Vib');
+const { exec } = require('child_process');
 
-const execSync = require('child_process').execSync;
-const Gpio = PIGPIO.Gpio;
-const vib = new Gpio(24, {
-    mode: PIGPIO.Gpio.INPUT,
-    pullUpDown: Gpio.PUD_UP,
-    edge: Gpio.FALLING_EDGE
-})
-console.log('1step')
-vib.enableInterrupt(Gpio.FALLING_EDGE);
-vib.on('interrupt', (level) => {
-    if (level == 1) {
+
+var vib;
+function init(){
+    vib = new Gpio(2, {
+        mode: Gpio.INPUT,
+        pullUpDown: Gpio.PUD_UP,
+        edge: Gpio.FALLING_EDGE
+    })
+    
+    vib.enableInterrupt(Gpio.FALLING_EDGE);
+    vib.on('interrupt', capture)
+}
+
+
+let vibon = false;
+function capture(level){
+    if (level == 1 && vibon == false) {
+        vibon = true
+        console.log('진동 감지')
+
         let date = new Date()
-        let hour = date.getHours()
-        let min = date.getMinutes()
-        let filename = `${hour}_${min}.jpg`
-        execSync(`raspistill -o strainger/${filename} --width 1080 --height 720`);
-        console.log('2step')
+        let filename = `${date.getDate()}_${ date.getHours()}_${date.getMinutes()}_${date.getSeconds()}.jpg`
+        exec(`wget http://127.0.0.1:8091/?action=snapshot -O stranger/${filename}`, (err, stdout, stderr)=>{
+            if(err) console.error(err)
+            else if(stderr) console.error(stderr);
+            else {
+                console.log(stdout);
+            }
+            let pic = new VibModel({
+                hours: Date.now(),
+                time: date,
+                filename: filename
+            })
+            pic.save().then(()=>{
+                console.log('잘저장됨')
+            })
+            vibon = false
+        });
     }
-})
+}
 
-
-
-
-
-
+module.exports = init;

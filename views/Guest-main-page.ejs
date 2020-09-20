@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
+    <title>VILOCK-guest</title>
     <!-- font -->
     <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
@@ -20,427 +20,216 @@
         integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
     <style>
         body,
-        html {
-            padding: 0;
-            margin: 0;
-            width: 100%;
+        html,
+        .main {
             height: 100%;
+            width: 100%;
         }
 
-        .nav-wrapper {
+        .left {
+            height: 100%;
+            font-family: 'Lato', sans-serif;
+            border: 1px solid gray;
+            width:100%
+        }
+
+        .title {
             font-family: 'Song Myung', sans-serif;
-            padding: 2px;
-            height: 200px;
-            background-color: #353866;
-        }
-
-        .m-left {
-            height: 100%;
-        }
-
-        .notice {
-            background-color: #ffee58;
-            height: 40px;
-            border: 2px dashed black;
-            padding: 5px;
             text-align: center;
-            display: flex;
+            font-size: 35px;
+            height: 70px;
+            background-color: #353866;
+            color: white;
+            line-height: 70px;
             width: 100%;
-            font-size: 18px;
-        }
-
-        .notice:hover {
-            color: red;
-            cursor: pointer;
-        }
-
-        .weather {
-            margin-bottom: 10px;
-        }
-
-        #today-date {
-            text-align: center;
-            font-size: 14px;
-
-        }
-
-        #t-tem,
-        #t-humidity,
-        #t-img {
-            width: 30%;
-            text-align: center;
-        }
-
-        .Info {
-            font-size: 16px;
-            font-weight: bold;
-            padding-top: 10px;
-            color: black;
-        }
-
-        .view-more {
-            background-color: #353866;
-            color: white
-        }
-
-        #source {
-            font-size: 12px;
-            font-weight: normal;
-        }
-
-        .btn,
-        .etc {
-            background-color: #AAABD3;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background-color: #AAABD3;
-        }
-
-        #check-fv,
-        #check-sv,
-        #check-tv {
-            float: right;
-        }
-
-        .check-video {
-            height: 270px;
-            width: 80%;
-            margin: auto;
-            margin-bottom: 50px;
-            padding: 5px;
-        }
-
-        #plus {
-            float: right;
-        }
-
-        #time {
-            font-size: 20px;
-        }
-
-        .guest {
-            text-align: center;
-            line-height: 25px;
-        }
-
-        #cloth-img {
-            background-size: cover;
-            background-repeat: no-repeat;
-            height: 30px;
-        }
-
-
-        .footer {
-            height: 130px;
-            border-top: 1px solid black;
-            text-align: center;
-            padding: 40px
-        }
-
-        #video {
-            width: 80%;
-            border: 1px solid black;
-            height: 300px;
-            margin: auto;
-            margin-bottom: 50px;
-            margin-top: 50px;
-        }
-
-        #chart {
-            width: 80%;
-            margin: auto;
-        }
-
-        .m-right {
-            border-left: 1px solid black;
-        }
-
-        .blurEffect {
-            filter: blur(10px);
-            -webkit-filter: blur(10px);
         }
 
         .greet {
-            width: 80%;
-            margin: auto;
-            text-align: center;
-            height: 200px;
-            font-family: '굴림';
-            margin-bottom: 50px;
-        }
-
-        .open-switch {
-            text-align: center;
             height: 150px;
-            width: 80%;
-            margin: auto
+            line-height: 30px;
+            font-size: 16px;
+            margin-top: 10%
         }
 
-        .stop {
-            height: 100px;
-            width: 80%;
+        .login {
+            height: 250px
+        }
+
+        #Tologin {
             margin: auto;
+            width: 80%
+        }
+
+
+        #inform {
+            font-size: 15px
+        }
+
+        #register {
+            background-color: #5868A8;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #login {
+            background-color: #353866;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .mobile-font {
+            font-size: 12px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .sides {
+            width: 70%;
+            margin: 20% auto 20% auto;
             text-align: center;
+            padding: 20% 0 20% 0;
+            height: 50%;
+            border: 1px solid #353866
         }
 
-        #face {
-            border-radius: 80%;
-            border: 1px solid black;
-
+        .view {
+            cursor: pointer;
         }
-
-        .sidenav {
-            font-family: 'Nanum Myeongjo', serif;
+        #inputs{
+            width:60%;
+            margin:auto
+        }
+        #findpassword{
+            background-color: #353866;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
-    <!-- 타이틀 -->
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/G-ViLock" class="brand-logo center">VILOCK</a>
-            <ul id="nav-mobile" class="right">
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/register">회원가입</a></li>
-            </ul>
+    <div class="main">
+        <div class="title brand-logo">
+            VILOCK
         </div>
-    </nav>
-
-    <!-- 경고창 -->
-    <div class="notice">
-        <img src="/public/images/사이렌.jpg" height="100%" alt="" class='siraen'>
-        <marquee direction="right" scrollamount="10">
-            <i class="material-icons">sentiment_very_satisfied</i>
-            <i class="material-icons">sentiment_very_dissatisfied</i>
-            <<--실시간 영상 확인하기-->>
-                <i class="material-icons">sentiment_very_dissatisfied</i>
-                <i class="material-icons">sentiment_very_satisfied</i>
-        </marquee>
-        <img src="/public/images/사이렌.jpg" height="100%" alt="" class='siraen'>
-
-    </div>
-
-    <!-- 좌측열 -->
-    <div class="row">
-        <div class="m-left col l2 hide-on-med-and-down">
-            <!-- 날씨 -->
-            <span class="Info">오늘의 날씨 <span id="source">Open Weather Map</span></span>
-            <table class="weather">
-                <tr>
-                    <th id="today-date" colspan="3"></th>
-                </tr>
-                <tr>
-                    <th>기온</th>
-                    <td id="t-tem"></td>
-                    <td id='t-img'>
-                        <img src="" alt="" id="w-img">
-                    </td>
-                </tr>
-                <tr>
-                    <th>습도</th>
-                    <td id="t-humidity" colspan="2"></td>
-                </tr>
-                <tr>
-                    <td id='cloth-img' colspan="3">
-                    </td>
-                </tr>
-            </table>
-            <!-- 손님 확인 -->
-            <div class="guest">우리집에 누가 가장많이왔을까? <br> 궁금하지 않아? <br>
-                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">당연하지</a>
-            </div>
-            <div id="modal1" class="modal bottom-sheet">
-                <div class="modal-content">
-                    <h4>과연 우리집에 누가 많이왔을까?</h4>
-                    <table>
-                        <tr>
-                            <template>
-                                <td>
-                                    <img src="" alt="" id="user_profile">
-                                </td>
-                                <td>
-                                    <span id="name"></span>
-                                    <span id="email"></span>
-                                    <span id="phone_number"></span>
-                                </td>
-                            </template>
-                        </tr>
-                    </table>
+        <div style="width:60%; margin:auto; height:100%;" id='main'>
+            <div class="left row">
+                <div class="greet col s12 l12">
+                    <div style="width: 80%; margin:auto">
+                        환영합니다 <br>
+                        <span style="font-family: 'Song Myung', sans-serif;">VILOCK</span>은 기존의 도어락보다 <br> 뛰어난 성능을 지닙니다
+                        <br>
+                        사용하세요 더욱 편한 삶을 살아가게될겁니다
+                    </div>
+                </div>
+                <div class="login col s12 l12 row my-wrapper valign-wrapper center-align">
+                    <form id="Tologin" method="POST" action="/login/checkIn">
+                        <div class="input-field">
+                            <input placeholder="아이디를 입력하세요" id="ID" type="text" class="validate" name="userid">
+                            <label for="ID">ID</label>
+                        </div>
+                        <div class="row input-field">
+                            <div class="input-field col s10 l11">
+                                <input id="hidepassword" type="password" class="validate" name="userpassword">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="col s2 l1 input-field"><img src="../public/images/visibility.png" class="view"
+                                    width="30px" style="float:left"></div>
+                        </div>
+                        <a class="waves-effect waves-light btn-small card-panel" id="register" href="/register">회원가입</a>
+                        <button class="waves-effect waves-light btn-small card-panel" id="login"
+                            type="submit">로그인</button>
+                            <br>
+                            <label for="">비밀번호를 잊으셨나요? 그렇다면 <a style="color:blue; font-weight: bold; font-size: 13; cursor:pointer" class="modal-trigger" href="#modal1">여기</a> 를 클릭해주세요</label>
+                            <div id="modal1" class="modal">
+                                <div class="modal-content">
+                                    <h4>임시 비밀번호 받기</h2>
+                                    <div id="inputs">
+                                        <div class="row">
+                                            <input type="text" placeholder="이름을 입력해주세요" id="fname" class="col s12 l12">
+                                            <input type="text" placeholder="아이디를 입력해주세요" id="fid" class="col s12 l12">
+                                        <input type="text" placeholder="이메일주소를 입력해주세요" id="femail" class=" col s8 l8">
+                                        <select class="browser-default col s4 l4" id='address'>
+                                            <option value="" disabled selected>이메일</option>
+                                            <option value="naver.com">@naver.com</option>
+                                            <option value="hanmail.net">@hanmail.net</option>
+                                            <option value="gamil.com">@gmail.com</option>
+                                            <option value="alone">직접입력</option>
+                                          </select>
+                                        </div>
+                                        <a class="waves-effect waves-light btn-small card-panel input-field" id="findpassword">확인</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
-        <div class="col l10 m-right s12 blurEffect">
-            <div class="greet">
-                실적물 제작 의도 작성공간
-            </div>
-            <div class="open-switch">
-                버튼
-            </div>
-            <table class="check-video">
-                <tr class="view-more">
-                    <th id="time"></th>
-                    <td id="plus"><a class="btn-floating waves-effect waves-light btn" href="#!"><i
-                                class="material-icons">add</i></a></td>
-                </tr>
-                <!-- 영상 정보(시간) -->
-                <tr>
-                    <td id="first-video">시간</td>
-                    <td><a class="waves-effect waves-teal btn" id="check-fv">영상 확인하기</a></td>
-                </tr>
-                <tr>
-                    <td id="second-video">시간</td>
-                    <td><a class="waves-effect waves-teal btn" id="check-sv">영상 확인하기</a></td>
-                </tr>
-                <tr>
-                    <td id="third-video">시간</td>
-                    <td><a class="waves-effect waves-teal btn" id="check-tv">영상 확인하기</a></td>
-                </tr>
-            </table>
-
-            <div id='chart'><canvas id="myChart"></canvas></div>
-
-            <div id="video">
-                <img src="" id="video_src">
-            </div>
-            <div class="stop">
-                <img src="../public/images/자물쇠.png" alt="yee" width="100px" id="key">
-            </div>
-            <!-- 바닥 -->
-            <div class="footer">
-                당신의 삶을 편리하게! <br>
-                스마트 도어락에 관한 모든 문의사항은 송호중학교 3학년 김은교에게 문의주시기 바랍니다. <br>
-                Tel : 010 - 4580 - 5306 , Email : eungyo307@naver.com / eungyo307@gmail.com
-            </div>
-        </div>
     </div>
-
-    <script>
-        let today_date = document.getElementById("today-date")
-        let t_humidity = document.getElementById('t-humidity')
-        let date = new Date()
-        today_date.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일'
-        let time = document.getElementById('time')
-        time.innerHTML = date.getMonth() + 1 + '월' + '  ' + date.getDate() + '일' + ' ' + '영상확인'
-        $(document).ready(function () {
-            $('.sidenav').sidenav();
-        });
-        let xhr = new XMLHttpRequest()
-
-        xhr.open('GET',
-            'https://api.openweathermap.org/data/2.5/weather?q=Ansan&appid=894ed0de092608f164b8f5e50e7f09d3')
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let data = xhr.responseText
-                data = JSON.parse(data)
-                let temp = data.main.temp - 273.15
-                temp = temp.toFixed(1)
-                let t_tem = document.getElementById('t-tem')
-                t_tem.innerHTML = temp + ' ' + '°C'
-                t_humidity.innerHTML = data.main.humidity + '%'
-                let cloth_img = document.getElementById('cloth-img')
-                //기온별 옷차림
-                if (temp < 4) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(4도).jpg')"
-                } else if (temp >= 4 && temp <= 8.9) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(5-8도).jpg')"
-                } else if (temp >= 9 && temp <= 11.9) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(9-11도).jpg')"
-                } else if (temp >= 12 && temp <= 16.9) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(12-16도).jpg')"
-                } else if (temp >= 17 && temp <= 19.9) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(17-19도).jpg')"
-                } else if (temp >= 20 && temp <= 22.9) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(20-22도).jpg')"
-                } else if (temp >= 23 && temp <= 27.9) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(23-27도).jpg')"
-                } else if (temp >= 28) {
-                    cloth_img.style.backgroundImage = "url('/public/images/기온별 옷차림(28도).jpg')"
-                } //기온별 옷차림
-                //날씨 이모티콘
-                let w_img = document.getElementById('w-img')
-                if (data.weather[0].description == "clear sky") {
-                    let img = "../public/images/화창.jpg"
-                    w_img.setAttribute('src', img)
-                } else if (data.weather[0].description == "rain") {
-                    let img = "../public/images/비.jpg"
-                    w_img.setAttribute('src', img)
-                } else if (data.weather[0].description == "snow") {
-                    let img = "../public/images/눈.jpg"
-                    w_img.setAttribute('src', img)
-                } else if (data.weather[0].description == "scattered clouds") {
-                    let img = "../public/images/구름.jpg"
-                    w_img.setAttribute('src', img)
-                } else {
-                    $('#t-img').remove()
-                }
-            }
-        }
-        xhr.send()
-
-
-
-        //chart
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-            // The data for our dataset
-            data: {
-                labels: ['5시간전', '4시간전', '3시간전', '2시간전', '1시간전'],
-                datasets: [{
-                    label: '현관문의 흔들림',
-                    borderColor: '#353866',
-                    backgroundColor: '#AAABD3',
-                    pointBackgroundColor: '#353866',
-                    lineTension: 0.1,
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }, ]
-            },
-
-
-            // Configuration options go here
-            options: {
-                title: {
-                    display: true,
-                    text: '우리집이 안전한가?'
-                },
-            }
-        });
-
-
-        //경보창
-        let siraen = document.querySelectorAll('.siraen')
-
-        function change_img() {
-            for (let i = 0; i < 2; i++) {
-                siraen[i].removeAttribute('src')
-                siraen[i].setAttribute('src', '/public/images/사이렌2.jpg')
-                setTimeout(() => {
-                    siraen[i].removeAttribute('src')
-                    siraen[i].setAttribute('src', '/public/images/사이렌.jpg')
-                }, 250);
-            }
-        }
-        setInterval(() => {
-            change_img()
-        }, 500);
-
-
-        let m_right = document.querySelector('.m-right')
-        m_right.addEventListener('click', _alert)
-        function _alert(){
-            alert('로그인을 하셔야 이용 가능합니다')
-        }
-    </script>
 </body>
+<script>
+     $(document).ready(function(){
+        $('.modal').modal();
+    });
+
+    document.getElementById('findpassword').addEventListener('click',()=>{
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://192.168.0.24:3000/login/findpassword')
+        xhr.setRequestHeader("Content-Type", "application/json")
+        xhr.onreadystatechange = ()=>{
+            if(xhr.status ===200 && xhr.readyState === 4){
+                console.log(JSON.parse(xhr.responseText))
+            }
+        }
+        xhr.send(JSON.stringify({
+            name : document.getElementById('fname').value,
+            id:document.getElementById('fid').value,
+            email:document.getElementById('femail').value,
+        }))
+        window.location.href = 'http://192.168.0.24:3000/'
+       })
+
+    let address = document.getElementById('address')
+    address.addEventListener('change', write)
+    let email = document.getElementById('femail')
+    function write() {
+      if (address.value == "alone") {
+        address.style.display = "none"
+      } else {
+        let email_v = email.value
+        email_v = email_v.split('@')[0]
+
+        email.value = email_v + '@' + address.value
+      }
+    }
+
+    let hidepassword = document.getElementById('hidepassword')
+
+    let viewpassword = document.querySelector('.view')
+    let idx = 0
+    viewpassword.addEventListener('click', () => {
+        if (idx == 0) {
+            hidepassword.removeAttribute('type')
+            viewpassword.removeAttribute('src')
+            viewpassword.setAttribute('src', '../public/images/invisible.png')
+            idx++
+        }
+        else if (idx == 1) {
+            hidepassword.setAttribute('type', 'password')
+            viewpassword.removeAttribute('src')
+            viewpassword.setAttribute('src', '../public/images/visibility.png')
+            idx = 0
+        }
+    })
+    let greet = document.querySelector('.greet')
+    if(window.innerWidth < 600){
+        greet.style.fontSize = '12px'
+        document.getElementById('main').style.width = '80%'
+    }
+
+</script>
 
 </html>

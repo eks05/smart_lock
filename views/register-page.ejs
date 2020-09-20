@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+  <title>VILOCK-register</title>
   <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -22,14 +22,12 @@
 
   <style>
     .main {
-      width: 80%;
       margin: auto;
       background-color: white;
       margin-bottom: 10px;
       margin-top: 10px;
-      height: 600px;
+      height: 750px;
     }
-
     .nav-wrapper {
       font-family: 'Song Myung', sans-serif;
       padding: 2px;
@@ -39,7 +37,7 @@
 
     .title {
       text-align: center;
-      margin: 20px;
+      height:7%;
       font-weight: bold;
       font-size: 30px;
       border-bottom: 1px solid black;
@@ -47,14 +45,7 @@
       color: black;
     }
 
-    #view:hover {
-      cursor: pointer;
-    }
 
-    #view {
-      display: none;
-      color:black
-    }
 
     .footer {
       height: 130px;
@@ -64,18 +55,53 @@
     }
 
     .btn {
-      background-color: #AAABD3;
+      background-color: #353866;
       font-weight: bold;
     }
-    .inputs{
-      display:flex;
-      margin:auto;
+
+    .inputs {
+      display: flex;
+      margin: auto;
       vertical-align: middle;
-      height:500px;
+      height: 93%;
+      width:60%;
+      border-left: 1px solid gray;
+      border-right:1px solid gray;
     }
-    #toreg{
-      margin:auto;
-      width:80%;
+
+    #toreg {
+      margin: auto;
+      width: 80%;
+    }
+
+    #register {
+      background-color: #353866;
+      font-weight: bold
+    }
+
+    #backpage {
+      background-color: #AAABD3;
+      font-weight: bold
+    }
+
+    .view,
+    .view2 {
+      cursor: pointer;
+    }
+
+    #checkidNop {
+      background-color: #353866;
+      font-weight: bold;
+    }
+    .none{
+      display:none
+    }
+    #sendidentify, #checkidentify{
+      background-color: #353866;
+      font-weight: bold;
+    }
+    #checkidentify{
+      padding:0
     }
   </style>
 </head>
@@ -83,7 +109,7 @@
 <body>
   <nav>
     <div class="nav-wrapper">
-      <a href="/G-ViLock" class="brand-logo center">VILOCK<a>
+      <a href="/G-ViLock" class="brand-logo center" id="vilock">VILOCK<a>
           </ul>
     </div>
   </nav>
@@ -91,49 +117,66 @@
     <div class="title">
       Register
     </div>
-      <div class="row inputs">
-        <form method="POST" id="toreg" action="/login/register">
-            <div class="input-field col s9 l9" >
-              <input placeholder="사용자의 이름을 입력하세요" id="name" type="text" class="validate" name="username">
-              <label for="Name">이름</label>
-            </div>
-            <div class="input-field col l9 s9">
-              <input placeholder="사용하실 아이디를 입력하세요" id="id" type="text" class="validate" name="userid">
-              <label for="ID">ID</label>
-            </div>
-            <div class="input-field col l9 s9">
-              <input id="password" type="password" class="validate" value="" name="userpassword">
-              <label for="Password">사용하실 비밀번호를 입력하세요(8글자 이상)</label>
-            </div>
-            <div class="col l3 input-field s3">
-              <i class='material-icons' id="view">remove_red_eye</i>
-            </div>
-            <div class="input-field col l9 s9">
-              <input id="email" type="email" class="validate" name="useraddress">
-              <label for="Email">이메일 주소를 입력하세요</label>
-            </div>
-            <div class="input-field col l3 s3" style="display: flex;">
-              <!-- <label>Browser Select</label> -->
-              <select class="browser-default" id='address'>
-                <option value="" disabled selected>이메일</option>
-                <option value="naver.com">@naver.com</option>
-                <option value="hanmail.net">@hanmail.net</option>
-                <option value="gamil.com">@gmail.com</option>
-                <option value="alone">직접입력</option>
-              </select>
-            </div>
-          <div class="row">
-            <div class="input-field col l9 s9">
-              <input placeholder="사용자의 전화번호를 입력하세요" id="tel" type="text" class="validate" name="usertel">
-              <label for="Tel">전화번호</label>
-            </div>
-              <div class="input-field col s12 l12 center">
-                <a class="waves-effect waves-light btn-small card-panel blue accent-2" href="/ViLock">뒤로가기</a>
-                <button class="waves-effect waves-light btn-small card-panel red accent-2" id="register" type="submit">회원가입</button>
-              </div>
+    <div class="row inputs">
+      <form method="POST" id="toreg" action="/login/register">
+        <div class="input-field col s10 l11">
+          <input placeholder="사용자의 이름을 입력하세요" id="name" type="text" class="validate" name="username">
+          <label for="Name">이름</label>
+        </div>
+        <div class="input-field col l11 s10">
+          <input placeholder="사용하실 아이디를 입력하세요" id="id" type="text" class="validate" name="userid">
+          <label for="ID">ID</label>
+        </div>
+          <a class="waves-effect waves-light btn-small card-panel input-field col s2 l1" id="checkidNop">확인</a>
+        <div class="input-field col l11 s10">
+          <input id="hidepassword" placeholder="사용하실 비밀번호를 입력하세요(8글자 이상)" type="password" class="validate" value=""
+            name="userpassword">
+          <label for="Password">Password</label>
+        </div>
+        <div class="col l1 input-field s2">
+          <img src="../public/images/visibility.png" class="view" width="30px" style="float:left">
+        </div>
+        <div class="input-field col l11 s10">
+          <input id="openpassword" placeholder="도어락비밀번호를 입력하세요(숫자 8자)" type="password" class="validate" value=""
+            name="openpassword">
+          <label for="도어락 비밀번호">Openpassword</label>
+        </div>
+        <div class="col l1 input-field s2">
+          <img src="../public/images/visibility.png" class="view2" width="30px" style="float:left">
+        </div>
+        <div class="input-field col l8 s7">
+          <input id="email" type="email" class="validate" name="useraddress" placeholder="이메일 주소를 입력하세요">
+          <label for="Email">Email</label>
+        </div>
+        <div class="input-field col l3 s3" style="display: flex;">
+          <!-- <label>Browser Select</label> -->
+          <select class="browser-default" id='address'>
+            <option value="" disabled selected>이메일</option>
+            <option value="naver.com">@naver.com</option>
+            <option value="hanmail.net">@hanmail.net</option>
+            <option value="gamil.com">@gmail.com</option>
+            <option value="alone">직접입력</option>
+          </select>
+        </div>
+          <a class="waves-effect waves-light btn-small card-panel input-field col s2 l1" id="sendidentify">확인</a>
+
+        <div class="input-field col l11 s10 none">
+          <input id="checkidentifyinput" placeholder="인증번호 8자리를 입력하세요" type="text" class="validate">
+          <label id='getries'>인증번호</label>
+        </div>
+          <a class="waves-effect waves-light btn-small card-panel input-field col s2 l1 none" id="checkidentify">인증번호 확인</a><input type="text" class='validate none' id="checknum" name="checkidentify"></a>
+        <div class="row">
+          <div class="input-field col l11 s10">
+            <input placeholder="사용자의 전화번호를 입력하세요" id="tel" type="text" class="validate" name="usertel">
+            <label for="Tel">전화번호</label>
           </div>
-        </form>
-      </div>
+          <div class="input-field col s10 l12 center">
+            <a class="waves-effect waves-light btn-small card-panel" id="backpage" href="/G-ViLock">뒤로가기</a>
+            <button class="waves-effect waves-light btn-small card-panel" id="register" type="submit">회원가입</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
   <div class="footer">
     당신의 삶을 편리하게! <br>
@@ -141,34 +184,82 @@
     tel : 010 - 4580 - 5306 , Email : eungyo307@naver.com / eungyo307@gmail.com
   </div>
   <script>
+
     //비밀번호 보여주는 부분
-    let passwordinput = document.getElementById('password')
-    passwordinput.addEventListener('click', show)
-    let viewpassword = document.getElementById('view')
+    let hidepassword = document.getElementById('hidepassword')
+    let openpassword = document.getElementById('openpassword')
+    let viewpassword = document.querySelector('.view')
+    let viewpassword2 = document.querySelector('.view2')
+    let idx = 0
+    viewpassword.addEventListener('click', () => {
+      if (idx == 0) {
+        hidepassword.removeAttribute('type')
+        viewpassword.removeAttribute('src')
+        viewpassword.setAttribute('src', '../public/images/invisible.png')
+        idx++
+      }
+      else if (idx == 1) {
+        hidepassword.setAttribute('type', 'password')
+        viewpassword.removeAttribute('src')
+        viewpassword.setAttribute('src', '../public/images/visibility.png')
+        idx = 0
+      }
+    })
+    let idx2 = 0
+    viewpassword2.addEventListener('click', () => {
+      if (idx2 == 0) {
+        openpassword.removeAttribute('type')
+        viewpassword2.removeAttribute('src')
+        viewpassword2.setAttribute('src', '../public/images/invisible.png')
+        idx2 = idx2 + 1
+      }
+      else if (idx2 == 1) {
+        openpassword.setAttribute('type', 'password')
+        viewpassword2.removeAttribute('src')
+        viewpassword2.setAttribute('src', '../public/images/visibility.png')
+        idx2 = 0
+      }
+    })
 
-    function show() {
-      viewpassword.style.display = "block"
-    }
-    viewpassword.addEventListener('click', view)
+    openpassword.addEventListener('keyup', () => {
+      let value = openpassword.value
+      value = value.replace(/[^\d]/g, "")
+      if (value.length > 8)
+        value = value.substr(0, 8)
+      openpassword.value = value;
+    })
 
-    function view() {
-      passwordinput.removeAttribute('type')
-      setTimeout(() => {
-        passwordinput.setAttribute('type', 'password')
-      }, 2000);
-    }
     let address = document.getElementById('address')
     address.addEventListener('change', write)
+    let email = document.getElementById('email')
 
     function write() {
       if (address.value == "alone") {
         address.style.display = "none"
       } else {
-        let email = document.getElementById('email')
         let email_v = email.value
+        email_v = email_v.split('@')[0]
+
         email.value = email_v + '@' + address.value
       }
     }
+    // 전화번호
+    document.getElementById('tel').addEventListener("keyup", function () {
+      let value = this.value;
+      // 숫자를 빼고 다 없애기
+      value = value.replace(/[^\d]/g, "")
+
+      // 숫자가 11개를 넘을때 뒤에것 잘라주기
+      if (value.length > 11)
+        value = value.substr(0, 11)
+
+      // 숫자를 전화번호 형식으로 바꿔주기
+      value = value.replace(/^(\d{3})(\d{0,4})(\d{0,4})$/, "$1-$2-$3")
+
+      this.value = value;
+
+    })
+
     //회원가입 버튼클릭
     let register_btn = document.getElementById('register')
     register_btn.addEventListener('click', register)
@@ -179,12 +270,9 @@
       let password = document.getElementById('password')
       let email = document.getElementById('email')
       let tel = document.getElementById('tel')
+      let checknum = document.getElementById('checknum')
       let Info = [name, id, password, email, tel]
-      if (password.value.length <= 7) {
-        password.nextElementSibling.style.color = 'red'
-        alert('비밀번호를 8자리 이상으로 다시 수정해주세요')
-      }
-      if (name.value == "" || id.value == "" || password.value == "" || email.value == "" || tel.value == "") {
+      if (name.value == "" || id.value == "" || password.value == "" || email.value == "" || tel.value == "" ||checknum == "재시도" ) {
         let emptyInfo = []
         for (let i = 0; i < 5; i++) {
           if (Info[i].value == "") {
@@ -209,7 +297,6 @@
             emptyInfo.splice(i, 1, "전화번호")
           }
         }
-        alert(emptyInfo + " " + "정보를 다시 채워주시기 바랍니다")
       } else {
         let user_Info = {
           name: name.value,
@@ -220,6 +307,121 @@
         }
       }
     }
+
+
+    let checkidNop = document.getElementById('checkidNop')
+    let id = document.getElementById('id')
+    let cNo = 0
+    checkidNop.addEventListener('click', () => {
+      if(id.value == ''){
+        checkidNop.innerHTML = 'ID를 입력해주세요'
+        checkidNop.style.backgroundColor = '#616161'
+        cNo = 1
+      }
+      else{
+      let xhr = new XMLHttpRequest()
+      xhr.open('POST', 'http://192.168.0.24:3000/login/checkidNop')
+      xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let abs = JSON.parse(xhr.responseText).use
+          change(abs)
+        }
+      }
+      xhr.send(JSON.stringify({
+        id: id.value
+      }))
+    }
+    })
+    function change(abs) {
+      cNo = 1
+      if (abs == "가능") {
+        checkidNop.innerHTML = '가능'
+        checkidNop.style.backgroundColor = "#00e676"
+      }
+      else {
+        checkidNop.innerHTML = '불가능'
+        checkidNop.style.backgroundColor = "#ff1744"
+      }
+    }
+    checkidNop.addEventListener('mouseover', () => {
+        if(cNo == 1){
+              M.toast({ html: '다른 아이디가 궁금하시다면 다시 클릭해주세요', classes: 'rounded', displayLength: 1000 })
+            }
+    })
+
+    let siy = document.getElementById('sendidentify')
+    let identify
+    let checktries = 0
+    let getries = document.getElementById('getries')
+    let checkidentify = document.getElementById('checkidentify')
+    let checkidentifyinput = document.getElementById('checkidentifyinput')
+    let name =  document.getElementById('name')
+    siy.addEventListener('click', ()=>{
+      getries.innerHTML = '인증번호'
+      getries.style.color = 'black'
+      getries.style.fontWeight = 'normal'
+      siy.innerHTML = '재요청'
+      checkidentify.classList.remove('none')
+      checkidentifyinput.parentElement.classList.remove('none')
+      let xhr = new XMLHttpRequest()
+      xhr.open('POST', 'http://192.168.0.24:3000/login/sendidentify')
+      xhr.setRequestHeader("Content-Type", "application/json")
+      xhr.onreadystatechange = ()=>{
+        if(xhr.status === 200 && xhr.readyState === 4){
+          identify =  JSON.parse(xhr.responseText).identify
+        }
+      }
+      xhr.send(JSON.stringify({
+        address : email.value,
+        name : name.value
+      }))
+    })
+    checkidentify.addEventListener('keyup', ()=>{
+      let value = this.value
+      if (value.length > 4)
+        value = value.substr(0, 4)
+      
+      this.value = value 
+    })
+    let checknum = document.getElementById('checknum')
+    checkidentify.addEventListener('click', ()=>{
+      if(checkidentifyinput.value == identify){
+        alert('인증되었습니다')
+        checkidentify.innerHTML="확인"
+        checknum.value = '확인'
+      }
+      else{
+        alert('재시도 해주시기 바랍니다')
+        checknum.value = "재시도"
+        checkidentify.innerHTML="재시도" 
+        checktries++
+        console.log(checktries)
+        if(checktries >= 3){
+          getries.innerHTML = 
+          '인증번호를 5회 틀리시면 작성하신 내용이 초기화됩니다.'
+          getries.style.color = 'red'
+          getries.style.fontWeight = 'bold'
+        }
+        if(checktries == 5){
+          window.location.href = 
+          'http://192.168.0.24:3000/register'
+        }
+      }
+    })
+  
+  if(window.innerWidth < 600){
+    let inp = document.querySelectorAll('input')
+    let a = document.querySelectorAll('a')
+    document.querySelector('.inputs').style.width = '80%'
+    for(let i = 0; i<inp.length;i++){
+      inp[i].style.fontSize = '13px'
+    }
+    document.getElementById('address').style.fontSize = '10px'
+    for(let i = 1; i<a.length;i++){
+      a[i].style.fontSize = '10px'
+    }
+  }
   </script>
 </body>
 

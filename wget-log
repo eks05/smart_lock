@@ -1,0 +1,11 @@
+--2020-06-08 05:19:15--  https://translate.google.com/translate_tts?ie=UTF-8
+Resolving translate.google.com (translate.google.com)... 216.58.197.142, 2404:6800:4004:80a::200e
+Connecting to translate.google.com (translate.google.com)|216.58.197.142|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.google.com/sorry/index?continue=https://translate.google.com/translate_tts%3Fie%3DUTF-8&q=EgQB8hauGJTn0vcFIhkA8aeDSy9hj77TmS0Y8ZanzVYGB1m2_ekmMgFy [following]
+--2020-06-08 05:19:16--  https://www.google.com/sorry/index?continue=https://translate.google.com/translate_tts%3Fie%3DUTF-8&q=EgQB8hauGJTn0vcFIhkA8aeDSy9hj77TmS0Y8ZanzVYGB1m2_ekmMgFy
+Resolving www.google.com (www.google.com)... 172.217.175.100, 2404:6800:4004:81e::2004
+Connecting to www.google.com (www.google.com)|172.217.175.100|:443... connected.
+HTTP request sent, awaiting response... 429 Too Many Requests
+2020-06-08 05:19:16 ERROR 429: Too Many Requests.
+
