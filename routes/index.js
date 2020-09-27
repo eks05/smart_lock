@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto')
+const fs = require('fs')
 
 const db = require('../models/db')
 const User = require('../models/User')
 const List = require('../models/userlist')
 const Vib = require('../models/Vib')
 const nodemailer = require('nodemailer');
-
 
 const config = require('./config')
 
@@ -29,7 +29,7 @@ router
         useraddress: useraddress,
         openpassword: openpassword,
         usertel: usertel,
-        workstop: '0'
+        workstop: '0',
       })
       Info.save()
       res.redirect('/Login')
@@ -99,7 +99,10 @@ router
       console.log('Message sent: %s', info.messageId);
     };
 
-    main().catch(console.error);
+    main()
+    .catch(err => {
+      console.error(err)
+    });
     res.send({ identify: identify })
   })
 
@@ -138,6 +141,7 @@ router
           function list(value) {
             let list = new List({
               username: '*' + user.username,
+              month: date.getMonth(),
               date: date.getDate(),
               time: '*' + value + date.getHours() + '시' + date.getMinutes() + '분'
             })
@@ -178,6 +182,20 @@ router
       }
     })
 
+    /*
+    User.findONe({userid : id})
+    .then((user)=>{
+      if(user.useraddress == email){
+        User.findOneAndUpdate({userid : id}, {userpassword : hashed_password}, ()=>{
+          console.log(password)
+        })
+      }
+    })
+    .catch((err)=>{
+      if(err return JSON(err))
+    })
+    */
+
 
 
     //send mail
@@ -217,7 +235,7 @@ router
       console.log('Message sent: %s', info.messageId);
     };
 
-    main().catch(console.error);
+    main().catch(err => console.error(err));
   })
   .post('/changepassword', (req, res)=>{
     console.log(req.body.NEW.split(''))

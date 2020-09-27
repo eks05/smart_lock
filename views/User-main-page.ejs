@@ -7,7 +7,6 @@
     <title>VILOCK</title>
     <!-- font -->
     <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
     <!-- icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -49,6 +48,7 @@
             width: 16.6666666667%;
             margin-top: 80px;
             border-right: 1px solid black;
+            height: 1000px
         }
 
         .main {
@@ -244,7 +244,7 @@
             text-align: center;
             padding: 50px 0 50px 0;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 50px;
             border-radius: 10%;
         }
 
@@ -281,36 +281,37 @@
         #video_src {
             width: 100%;
             border-radius: 10%;
-            margin-top: 20px;
+            margin-top: 50px;
             cursor: pointer;
         }
 
-        .modal_child{
+        .modal_child {
             font-size: 30px;
-            text-align:center
+            text-align: center
         }
-        .modal{
-            width:40%;
-            height:80%;
+
+        .modal {
+            width: 40%;
+            height: 80%;
         }
-        
-        #modal_change{
-            border:2px solid #353866;
+
+        #modal_change {
+            border: 2px solid #353866;
             width: 70%;
-            height:50px;
+            height: 50px;
         }
 
-        #foropen{
-            margin-top:20%
+        #foropen {
+            margin-top: 20%
         }
 
-        #getattribute{
-            border:2px solid #353866;
+        #getattribute {
+            border: 2px solid #353866;
             background-color: white;
-            height:100%;
-            width:30%;
-            color:black;
-            padding:0;
+            height: 100%;
+            width: 30%;
+            color: black;
+            padding: 0;
         }
 
         #imvideo_src {
@@ -346,14 +347,15 @@
         #wsNrbtn,
         #stopNrestart {
             height: 40px;
-            
+
         }
-        #wsNrbtn{
-            padding:0
+
+        #wsNrbtn {
+            padding: 0
         }
-        
-        #stopNrestart{
-            margin-right:10px
+
+        #stopNrestart {
+            margin-right: 10px
         }
 
         #chart {
@@ -362,12 +364,12 @@
             margin-bottom: 50px;
         }
 
-        #label{
-            font-size:15px;
-            margin-bottom:10px
+        #label {
+            font-size: 15px;
+            margin-bottom: 10px
         }
 
-        #tocpw{
+        #tocpw {
             background-color: #353866;
             font-weight: bold;
 
@@ -378,13 +380,13 @@
 <body>
     <!-- 타이틀 -->
     <% if(idx) { %>
-        <script>
-            alert('비밀번호를 변경해주세요')
-            setTimeout(() => {
-                window.location.href = 'http://192.168.0.24:3000/changepw'
-            }, 1000);
-        </script>
-    <% } %>    
+    <script>
+        alert('비밀번호를 변경해주세요')
+        setTimeout(() => {
+            window.location.href = 'http://192.168.0.24:3000/changepw'
+        }, 1000);
+    </script>
+    <% } %>
     <nav class="fixed" style="z-index:1">
         <div class="nav-wrapper">
             <ul>
@@ -400,8 +402,11 @@
                         <div class="modal-content black-text">
                             <div class="modal_child">프로필 사진 변경. <br> 자신의 얼굴 필수</div>
                             <div class="filebox center" style="margin-top:15%">
-                                <form action="/profile" method="POST"class='center' enctype="multipart/form-data" style="display:flex;width:70%;margin:auto;height:50px;">
-                                    <div id="modal_change"><label for="ex_file" style="float:right; height:100%; background-color: #FADD81;">찾아보기</label></div>
+                                <form action="/profile" method="POST" class='center' enctype="multipart/form-data"
+                                    style="display:flex;width:70%;margin:auto;height:50px;">
+                                    <div id="modal_change"><label for="ex_file"
+                                            style="float:right; height:100%; background-color: #FADD81;">찾아보기</label>
+                                    </div>
                                     <input type="file" class='waves-effect' id="ex_file" name='profile'
                                         oninput="sendattribute()">
                                     <button type="submit" id="getattribute" class="profile">확인</button>
@@ -423,16 +428,23 @@
                             <div class="modal_child" id="modal_child_two">도어락 비밀번호 변경</div>
                             <div class="filebox center">
                                 <div id="foropen" class="row">
-                                    <input type="text" id="originpassword" name="origin" class="input-field col s10 l10" placeholder="기존 비밀번호를 입력해주세요">
-                                    <input type="text" id="svpassword" name="foropen" class="input-field col s10 l10" placeholder="숫자 8자를 입력해주세요">
-                                    <input type="number" placeholder="기존 비밀번호를 입력해주세요" id="mobileoriginpassword" name="origin" class="input-field col s10 l10 none" max="8" maxlength="7" oninput="maxLengthCheck(this)" >
-                                    <input type="number" placeholder="숫자 8자를 입력해주세요" id="mobilesvpassword" name="foropen" class="input-field col s10 l10 none" max="8" maxlength="7" oninput="maxLengthCheck(this)" >
+                                    <input type="number" id="originpassword" name="origin"
+                                        class="input-field col s10 l10" placeholder="기존 비밀번호를 입력해주세요">
+                                    <input type="number" id="svpassword" name="foropen" class="input-field col s10 l10"
+                                        placeholder="숫자 8자를 입력해주세요">
+                                    <input type="number" placeholder="기존 비밀번호를 입력해주세요" id="mobileoriginpassword"
+                                        name="origin" class="input-field col s10 l10 none" max="8" maxlength="7"
+                                        oninput="maxLengthCheck(this)">
+                                    <input type="number" placeholder="숫자 8자를 입력해주세요" id="mobilesvpassword"
+                                        name="foropen" class="input-field col s10 l10 none" max="8" maxlength="7"
+                                        oninput="maxLengthCheck(this)">
                                     <button class='btn col s2 l2' id='svbtn'>확인</button>
                                 </div>
                             </div>
                             <div class="modal_child" id="modal_child_two">계정 비밀번호 변경</div>
                             <div class='center'>
-                                <a class="waves-effect waves-light btn-small card-panel input-field" id='tocpw' href="http://192.168.0.24:3000/changepw">이동</a>
+                                <a class="waves-effect waves-light btn-small card-panel input-field" id='tocpw'
+                                    href="http://192.168.0.24:3000/changepw">이동</a>
                             </div>
                         </div>
                     </div>
@@ -442,12 +454,13 @@
     </nav>
     <!-- 좌측열 -->
     <div class="m-left hide-on-med-and-down fixed">
-        <div style="overflow-y: auto; height:400px">
+        <div style="overflow-y: auto; height:450px">
             <table class="openlist" border="1px solid black">
                 <thead>
                     <tr>
-                        <td style="text-align:center" colspan="2"><%= new Date().getMonth() + 1 +'월' +new Date().getDate() + '일' %> <br>
-                             <span style="color:red; font-size: 11px;">날짜가 지나면 초기화 됩니다. <br> * : 로그인, # : 입장</td>
+                        <td style="text-align:center" colspan="2">
+                            <%= new Date().getMonth() + 1 +'월' +new Date().getDate() + '일' %> <br>
+                            <span style="color:red; font-size: 11px;">날짜가 지나면 초기화 됩니다. <br> * : 로그인, # : 입장</td>
                     </tr>
                     <tr>
                         <td style="text-align:center">시간</td>
@@ -469,7 +482,7 @@
         <img src="http://192.168.0.24:8091/?action=stream" id="video_src" class="none">
     </div>
     <div class="row main">
-            <div class="col l10 m-right s12">
+        <div class="col l10 m-right s12">
             <div class="open-switch">
                 <form action="/open/password" method="POST" id="check-password">
                     <div class="row">
@@ -498,7 +511,7 @@
             </table>
 
             <div id='chart'>
-                <canvas id="myChart" width="100%" ></canvas>
+                <canvas id="myChart" width="100%"></canvas>
             </div>
             <div id='imcontroler' class="none"><i class="large material-icons">play_arrow </i>
             </div>
@@ -530,42 +543,42 @@
         let infomation
         let idinfo
 
-        function maxLengthCheck(object){ 
-            if (object.value.length > object.maxLength){
-                object.value = object.value.slice(0, object.maxLength); 
-            } 
+        function maxLengthCheck(object) {
+            if (object.value.length > object.maxLength) {
+                object.value = object.value.slice(0, object.maxLength);
+            }
         }
         let svpassword = document.getElementById('svpassword')
         let mobilesvpassword = document.getElementById('mobilesvpassword')
         let svbtn = document.getElementById('svbtn')
-        svbtn.addEventListener('click', ()=>{
+        svbtn.addEventListener('click', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open('POST','http://192.168.0.24:3000/open/foropen')
+            xhr.open('POST', 'http://192.168.0.24:3000/open/foropen')
             xhr.setRequestHeader("Content-Type", "application/json")
-            xhr.onreadystatechange = ()=>{
-                if(xhr.status === 200  && xhr.readyState === 4){
+            xhr.onreadystatechange = () => {
+                if (xhr.status === 200 && xhr.readyState === 4) {
                     let available = JSON.parse(xhr.responseText).message
                     avail(available)
                 }
             }
             xhr.send(JSON.stringify({
-                id:idinfo,
-                svpassword : svpassword.value,
-                mobilesvpassword : mobilesvpassword.value,
-                originpassword : document.getElementById('originpassword').value,
-                mobileoriginpassword : document.getElementById('mobileoriginpassword').value
+                id: idinfo,
+                svpassword: svpassword.value,
+                mobilesvpassword: mobilesvpassword.value,
+                originpassword: document.getElementById('originpassword').value,
+                mobileoriginpassword: document.getElementById('mobileoriginpassword').value
             }))
         })
 
-        function avail(value){
-            if(value == '사용불가능'){
+        function avail(value) {
+            if (value == '사용불가능') {
                 alert('사용불가능합니다.')
             }
-            else if(value == '사용가능'){
+            else if (value == '사용가능') {
                 alert('변경되었습니다.')
                 window.location.href = 'http://192.168.0.24:3000/U-ViLock'
             }
-            else if(value == '기존 비밀번호가 틀렸습니다') {
+            else if (value == '기존 비밀번호가 틀렸습니다') {
                 alert('기존 비밀번호가 틀렸습니다')
                 window.location.href = 'http://192.168.0.24:3000/U-ViLock'
             }
@@ -591,9 +604,9 @@
             xhr.send()
         }
         function chart(tries, wtries) {
-            
+
             console.log(tries.t13, tries.t46, tries.t79, tries.t1012, tries.t1315, tries.t1618, tries.t1921, tries.t2224)
-            console.log(wtries.w13 ,wtries.w46 ,wtries.w79 ,wtries.w1012 ,wtries.w1315 ,wtries.w1618 ,wtries.w1921 ,wtries.w2224)
+            console.log(wtries.w13, wtries.w46, wtries.w79, wtries.w1012, wtries.w1315, wtries.w1618, wtries.w1921, wtries.w2224)
             var ctx = document.getElementById("myChart").getContext("2d");
 
             var myLineChart = new Chart(ctx, {
@@ -605,9 +618,9 @@
                         data: [tries.t13, tries.t46, tries.t79, tries.t1012, tries.t1315, tries.t1618, tries.t1921, tries.t2224],
                         backgroundColor: "rgba(170, 171, 211, 1)",
                         pointBackgroundColor: "rgba(53, 56, 102, 1)",
-                    },{
-                        label : '주간 평균',
-                        data : [wtries.w13 ,wtries.w46 ,wtries.w79 ,wtries.w1012 ,wtries.w1315 ,wtries.w1618 ,wtries.w1921 ,wtries.w2224],
+                    }, {
+                        label: '주간 평균',
+                        data: [wtries.w13, wtries.w46, wtries.w79, wtries.w1012, wtries.w1315, wtries.w1618, wtries.w1921, wtries.w2224],
                         backgroundColor: "rgba(224,227,218,1)",
                         pointBackgroundColor: "rgba(53, 56, 102, 1)",
 
@@ -624,12 +637,12 @@
                 }
             });
         }
-        document.getElementById('hidepassword').addEventListener('click', ()=>{
+        document.getElementById('hidepassword').addEventListener('click', () => {
             let xhr = new XMLHttpRequest()
             xhr.open("POST", "http://192.168.0.24:3000/open/checkcheck")
             xhr.setRequestHeader("Content-Type", "application/json")
-            xhr.onreadystatechange = ()=>{
-                if(xhr.status === 200 && xhr.readyState === 4){
+            xhr.onreadystatechange = () => {
+                if (xhr.status === 200 && xhr.readyState === 4) {
                     let message = JSON.parse(xhr.responseText).message
                     workNstop(message)
                 }
@@ -638,18 +651,18 @@
                 id: infomation.split('_')[1].split('>')[1].split(' ')[24]
             }))
         })
-        
+
         let isworkNstopworking = true
-        function workNstop(value){
-            if( isworkNstopworking == false){
+        function workNstop(value) {
+            if (isworkNstopworking == false) {
                 return
             }
-            if(value == '가동중'){
+            if (value == '가동중') {
                 console.log('good')
             }
-            else if(value == '정지'){
+            else if (value == '정지') {
                 let promptvalue = prompt('키패드가 정지되었습니다. 재가동을 원하시면 "네" 그렇지 않으면 "아니요"라고 작성하세요')
-                if(promptvalue == '네'){
+                if (promptvalue == '네') {
                     document.querySelector('.stop').scrollIntoView()
                     workkeypad()
                 }
@@ -698,7 +711,7 @@
             const toastHTML = '<span>기존은 한국 기상청, 오른쪽 버튼 클릭시 노르웨이 기상청</span><button class="btn-flat toast-action"><a href="https://worldweather.wmo.int/kr/country.html?countryCode=8">연결</a></button>';
             M.toast({ html: toastHTML, classes: 'rounded', displayLength: 2000 });
         })
-        t_tem.addEventListener('dblclick', ()=>{
+        t_tem.addEventListener('dblclick', () => {
             window.location.href = 'https://www.weather.go.kr/w/index.do'
         })
 
@@ -734,10 +747,10 @@
         keys.addEventListener('mouseover', () => {
             M.toast({ html: '키패드를 가동 또는 정지시킬 수 있습니다', displayLength: 1000 })
         })
-        keys.addEventListener('click', ()=>{
+        keys.addEventListener('click', () => {
             workkeypad()
         })
-        function workkeypad(){
+        function workkeypad() {
             keys.classList.add('none')
             document.getElementById('stopNrestart').parentElement.classList.remove('none')
             document.getElementById('stopNrestart').parentElement.style.display = 'flex'
@@ -782,7 +795,7 @@
                 controler.classList.remove('none')
             }, 1000 * 30);
         })
-        video.addEventListener('contextmenu',()=>{
+        video.addEventListener('contextmenu', () => {
             video.classList.add('none')
             controler.classList.remove('none')
         })
@@ -796,8 +809,6 @@
         mvideo.addEventListener('mouseover', () => {
             M.toast({ html: '더블클릭하면 전체화면으로 보실 수 있습니다', classes: 'rounded', displayLength: 1000 })
         })
-
-
 
         video.addEventListener('dblclick', () => {
             !document.fullscreen ? video.requestFullscreen() : document.exitFullscreen()
@@ -842,7 +853,7 @@
             if (boo.message == "true") {
                 hidepassword.classList.add('hidepasswordimg')
             }
-            else{
+            else {
                 hidepassword.classList.remove('hidepasswordimg')
             }
         }

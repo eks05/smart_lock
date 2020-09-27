@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VILOCK-guest</title>
     <!-- font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
     <!-- icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- favicon -->
@@ -26,13 +26,13 @@
         .main {
             height: 100%;
             width: 100%;
+            font-family: 'Noto Sans KR', sans-serif;
         }
 
         .left {
             height: 100%;
-            font-family: 'Lato', sans-serif;
             border: 1px solid gray;
-            width:100%
+            width:100%;
         }
 
         .title {
@@ -49,7 +49,7 @@
         .greet {
             height: 150px;
             line-height: 30px;
-            font-size: 16px;
+            font-size: 20px;
             margin-top: 10%
         }
 
@@ -63,9 +63,6 @@
         }
 
 
-        #inform {
-            font-size: 15px
-        }
 
         #register {
             background-color: #5868A8;
@@ -143,7 +140,7 @@
                         <button class="waves-effect waves-light btn-small card-panel" id="login"
                             type="submit">로그인</button>
                             <br>
-                            <label for="">비밀번호를 잊으셨나요? 그렇다면 <a style="color:blue; font-weight: bold; font-size: 13; cursor:pointer" class="modal-trigger" href="#modal1">여기</a> 를 클릭해주세요</label>
+                            <label for="" style="font-size:15px" id="label">비밀번호를 잊으셨나요? 그렇다면 <a style="color:blue; font-weight: bold; font-size: 13; cursor:pointer" class="modal-trigger" href="#modal1">여기</a> 를 클릭해주세요</label>
                             <div id="modal1" class="modal">
                                 <div class="modal-content">
                                     <h4>임시 비밀번호 받기</h2>
@@ -184,6 +181,7 @@
                 console.log(JSON.parse(xhr.responseText))
             }
         }
+
         xhr.send(JSON.stringify({
             name : document.getElementById('fname').value,
             id:document.getElementById('fid').value,
@@ -226,8 +224,9 @@
     })
     let greet = document.querySelector('.greet')
     if(window.innerWidth < 600){
-        greet.style.fontSize = '12px'
+        greet.style.fontSize = '13px'
         document.getElementById('main').style.width = '80%'
+        document.getElementById('label').style.fontSize = '13px'
     }
 
 </script>

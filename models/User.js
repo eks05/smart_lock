@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema({
     },
     workstop:{
         type: String
+    },
+    familypw: {
+        type : String
     }
 })
 

@@ -41,6 +41,7 @@ function playWeather(level, tick){
     const endTick = tick;
     const diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic  //도착시점 - 출발시점
     const distance = diff / 2 / MICROSECDONDS_PER_CM; //duration / 2 / 29
+    console.log(distance)
     if (distance <= 40 && isWeatherPlaying == false) {
       isWeatherPlaying = true;
       //크롤링

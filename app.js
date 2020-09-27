@@ -10,7 +10,7 @@ const User = require('./models/User')
 const List = require('./models/userlist')
 const Vib = require('./models/Vib')
 
-require("pigpio").configureSocketPort(8292);
+require("pigpio").configureSocketPort(8293);
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -32,9 +32,11 @@ app.use(cookieParser());
 require('./sensor/vib')()
 require('./sensor/hc-sr')();
 require('./sensor/pir-sensor')
+require('./sensor/keypad')
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
+//미들웨어 next를 통해 넘어감
 app.use(logger("dev"))
 app.use(express.json()) // req body 가능하게함
 app.use(express.urlencoded({ extended: false })) // req body 가능하게함
@@ -50,6 +52,8 @@ app.use('/login', require('./routes/index')) //로그인 회원가입
 app.use('/open', require('./routes/open')) // 열고닫기, 도어락 비밀번호 설정 등
 app.use('/chart', require('./routes/chart')) // 차트
 
+
+//요청에 따른 경로로 이동
 app.post('/profile', upload.single('profile'), (req, res) => {
   User.findOne({userid : req.cookies.Info.id}, (err, user)=>{
     let profile = user.profile
@@ -71,7 +75,8 @@ app.get('/G-ViLock', (req, res) => {
 app.get('/U-ViLock', (req, res) => {
   let date = new Date()
   // TODO List -> History
-  List.find({ date: date.getDate()}, (err, history) => {
+  List.find({ date: date.getDate(), month : date.getMonth()}, (err, history) => {
+    if (err) throw err
     let username = history.map(el => el.username)
     let time = history.map(el => el.time)
 
@@ -88,7 +93,7 @@ app.get('/U-ViLock', (req, res) => {
             profile: user.profile,
             passingpic: pic,
             hour: time,
-            idx : req.cookies.Info.idx //임시 비밀번호 확인
+            idx : req.cookies.Info.idx, //임시 비밀번호 확인
           })
         if (err) {
           res.status(500).send('err')

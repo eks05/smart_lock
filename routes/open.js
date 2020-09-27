@@ -151,7 +151,8 @@ router
         let list = new List({
           username: '#' + user.username,
           date: date.getDate(),
-          time: '#'+ value + date.getHours() + '시' + date.getMinutes() + '분'
+          time: '#'+ value + date.getHours() +
+          '시' + date.getMinutes() + '분'
         })
         list.save()
       }

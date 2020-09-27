@@ -1,19 +1,27 @@
 const Keypad = require('empire-matrix-keypad');
-const PIGPIO = require('pigpio')
-const GPIO = require('onoff').Gpio
+const PIGPIO = require('pigpio').Gpio
 const { exec } = require('child_process')
 const googleTTS = require('google-tts-api');
 
 const User = require('../models/User')
 const List = require('../models/userlist')
+const rekog = require('./rekognition')
 
-const buzzer = new GPIO(27, 'out');
-
-const sv1 = new PIGPIO.Gpio(3, {
-	mode: PIGPIO.Gpio.OUTPUT
+const buzzer = new PIGPIO(27, {
+	mode:PIGPIO.OUTPUT
 });
-const sv2 = new PIGPIO.Gpio(4, {
-	mode: PIGPIO.Gpio.OUTPUT
+
+const sv1 = new PIGPIO(3, {
+	mode: PIGPIO.OUTPUT
+});
+const sv2 = new PIGPIO(4, {
+	mode: PIGPIO.OUTPUT
+})
+let Gleds = new PIGPIO(14, {
+	mode:PIGPIO.OUTPUT
+})
+let Rleds = new PIGPIO(15,{
+	mode:PIGPIO.OUTPUT
 })
 
 const config = {
@@ -29,67 +37,43 @@ const config = {
 const keypad = new Keypad(config);
 keypad.on('keyPress', function (key) {
 	console.log('Key Pressed: ' + key);
-	buzzer.writeSync(1)
+	buzzer.digitalWrite(1)
 	setTimeout(() => {
-		buzzer.writeSync(0)
+		buzzer.digitalWrite(0)
 	}, 50);
-	if(key == "*") setKeypadEnable(true)
-});
+	if(key == "*") console.log('*')
+	if(key == "#") rekog(true)
+})
+
 keypad.on('enteredPassword', function (password) {
-	console.log('Password entered: ' + password);
-	checkPasswordIsValid(password)
+		console.log('Password entered: ' + password);
+		checkPasswordIsValid(password)
 });
-
-var enableKeypad = false;
-var timeoutID;
-let ten = 0
-let sec
-function setKeypadEnable(isEnable){
-	if(timeoutID !== undefined){
-		clearTimeout(timeoutID);
-		timeoutID = undefined;
-		clearInterval(sec)
-		sec = undefined;
-		ten = 0
-	}
-	
-
-	enableKeypad = isEnable;
-	if(isEnable){
-		timeoutID = setTimeout(()=>{
-			enableKeypad = false;
-		}, 15 * 10);
-		sec = setInterval(() => {
-		ten++
-		console.log(ten)
-		if(ten >= 50){
-			clearInterval(sec)
-			sec = undefined;
-			ten = 0	
-		}
-	}, 1000);
-	}
-}
-var isgoing = false;
-if(ten > 10){
-	ten =0;
-	clearInterval(sec)
-	sec = undefined
+function green(){
+	Gleds.digitalWrite(1)
+	setTimeout(() => {
+		Gleds.digitalWrite(0)
+	}, 2000);
 }
 
+function red(){
+	Rleds.digitalWrite(1)
+	setTimeout(() => {
+		Rleds.digitalWrite(0)
+	}, 2000);
+}
 function checkPasswordIsValid(password){
+	
 	if(password == undefined) return;
-	if(isgoing == true) return;
 
-	isgoing = true;
 	User.findOne({ openpassword: password }, (err, user) => {
-		if (err !== null || user == null || user.workstop == 1 || ten > 10) {
+		if (err !== null || user == null || user.workstop == 1) {
 			ten = 0
 			playSound('비밀번호가 잘못되었습니다')
 			console.log('error By password')
-			clearInterval(sec)
-			setKeypadEnable(false)
-		} else if (user.openpassword == password && user.workstop == 0 && ten <=10) {
+			red()
+		} else if (user.openpassword == password && user.workstop == 0 ) {
+			green()
 			ten = 0
 			let date = new Date()
 			
@@ -103,6 +87,7 @@ function checkPasswordIsValid(password){
 			function list(value){
 				let list = new List({
 				  username: '#' + user.username,
+				  month: date.getMonth(),
 				  date: date.getDate(),
 				  time: '#'+ value + date.getHours() + '시' + date.getMinutes() + '분'
 				})
@@ -128,11 +113,8 @@ function checkPasswordIsValid(password){
           		sv2.servoWrite(544);
         		},1500)
 			
-				clearInterval(sec)
 			}, 6000)
-				setKeypadEnable(false)
 		}
-		isgoing = false;
 	})
 }
 
@@ -149,5 +131,3 @@ function playSound(message){
 		console.error(err.stack);
 	});
 }
-
-module.exports = setKeypadEnable;
