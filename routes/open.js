@@ -1,33 +1,54 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs')
-const path = require('path')
 const crypto = require('crypto')
-var PIGPIO = require('pigpio')
+const PIGPIO = require('pigpio').Gpio
+const config = require('./config')
 
 
-var googleTTS = require('google-tts-api');
+const googleTTS = require('google-tts-api');
 const { exec } = require('child_process')
 
 const db = require('../models/db')
 const User = require('../models/User')
 const List = require('../models/userlist')
-const sv1 = new PIGPIO.Gpio(3, {
-  mode: PIGPIO.Gpio.OUTPUT
+const sv1 = new PIGPIO(3, {
+  mode: PIGPIO.OUTPUT
 });
-const sv2 = new PIGPIO.Gpio(4, {
-  mode: PIGPIO.Gpio.OUTPUT
+const sv2 = new PIGPIO(4, {
+  mode: PIGPIO.OUTPUT
+});
+let Gleds = new PIGPIO(14, {
+  mode:PIGPIO.OUTPUT
+})
+let Rleds = new PIGPIO(15,{
+  mode:PIGPIO.OUTPUT
+})
+
+const button = new PIGPIO(17, {
+  mode:PIGPIO.INPUT,
+  pullUpDown: PIGPIO.PUD_DOWN,
+  edge: PIGPIO.EITHER_EDGE,
 });
 
-const button = new PIGPIO.Gpio(17, {
-  mode:PIGPIO.Gpio.INPUT,
-  pullUpDown: PIGPIO.Gpio.PUD_DOWN,
-  edge: PIGPIO.Gpio.EITHER_EDGE,
-});
+function green(){
+	Gleds.digitalWrite(1)
+	setTimeout(() => {
+		Gleds.digitalWrite(0)
+	}, 2000);
+}
+
+function red(){
+	Rleds.digitalWrite(1)
+	setTimeout(() => {
+		Rleds.digitalWrite(0)
+	}, 2000);
+}
+
 button.on('interrupt', (level) => {
   console.log('open by button')
   if (level == 1) {
     sv2.servoWrite(1600)
+    green()
       setTimeout(()=>{
         sv1.servoWrite(1800);
       },1500)
@@ -50,44 +71,31 @@ button.on('interrupt', (level) => {
 
 router
   .post('/foropen', (req, res) => {
-    console.log(req.body)
     let thispassword 
     let originpassword
+    let pw 
     if(req.body.svpassword == ''){
-      thispassword = req.body.mobilesvpassword
+      thispassword = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.mobilesvpassword).digest('base64')
       originpassword = req.body.mobileoriginpassword
+      pw = req.body.mobileoriginpassword
     }else{
-      thispassword = req.body.svpassword
+      thispassword = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.svpassword).digest('base64')
       originpassword = req.body.originpassword
+      pw = req.body.svpassword
     }
-    User.findOne({userid : req.body.id},(err, user)=>{
-      if(err) return res.json(err)
-      console.log(user.openpassword)
-      if(originpassword == user.openpassword){
-        console.log('good')
         User.find({openpassword : thispassword}, (err, user)=>{
-          if (err) return res.json(err)
-          if(user == '' && thispassword.length > 7 && thispassword.length <= 8){
-            update()
+          if(err) throw err
+          console.log(user)
+          if(user == ''  && pw.length > 7 && pw.length <= 8){
+            User.findOneAndUpdate({ openpassword: originpassword }, { openpassword: thispassword}, () => {
+              console.log('사용가능')
+              res.send({message : '사용가능'})
+              res.redirect('/U-ViLock')
+            })
           }else {
             res.send({message: '사용불가능'})
           }
         })
-      }
-      else{
-        res.send({message : '기존 비밀번호가 틀렸습니다.'})
-      }
-    })
-    function update(){
-      User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
-        if (err) return res.json(err)
-        if (user.userid == req.cookies.Info.id && user.useraddress == req.cookies.Info.address) {
-          User.findOneAndUpdate({ userid: user.userid }, { openpassword: thispassword }, () => {
-            res.send({message : '사용가능'})
-          })
-        }
-      })
-    }
   })
 
   //keypad stop & restart
@@ -118,7 +126,7 @@ router
   })
   
   .post('/img',(req, res)=>{
-    let userpassword = req.body.hidepassword
+    let userpassword = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.hidepassword).digest('base64')
     User.findOne({userid : req.cookies.Info.id}, (err, list)=>{
       console.log(list)
       if(userpassword == list.openpassword){
@@ -131,13 +139,14 @@ router
   })
 
   .post('/password', (req, res) => {
-    let hidepassword = req.body.hidepassword
-
+    let hidepassword = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.hidepassword).digest('base64')
+    
     let saying = false
     User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
+      if(err) throw err
       let date = new Date()
       let svpw = user.openpassword
-      console.log(svpw == hidepassword)
+      
       if (svpw == hidepassword && saying == false) {
         if(date.getHours() >= 12){
           let pm = '오후'
@@ -160,6 +169,7 @@ router
         // pass the GPIO number
         let name = user.username
         sv2.servoWrite(1600)
+        green()
           setTimeout(()=>{
             sv1.servoWrite(1800);
           },1500)
@@ -172,6 +182,7 @@ router
           saytts(bye)
 
           sv1.servoWrite(800)
+          green()
             setTimeout(()=>{
               sv2.servoWrite(544);
             },1500)
@@ -181,6 +192,7 @@ router
       else {
         res.redirect('/U-ViLock')
         saying = false;
+        red()
       }
     })
   })

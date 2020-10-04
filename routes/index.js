@@ -9,30 +9,40 @@ const List = require('../models/userlist')
 const Vib = require('../models/Vib')
 const nodemailer = require('nodemailer');
 
+
 const config = require('./config')
+
+
 
 router
   //회원가입
   .post('/register', (req, res) => {
     //digest : 인코딩, base64 가장 짧음
     let hashed_password = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.userpassword).digest('base64')
-    let { username, userid, userpassword, useraddress, usertel, openpassword, checkidentify } = req.body
+    let hashed_op = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.openpassword).digest('base64')
+    let { username, userid, userpassword, useraddress, openpassword, usertel, checkidentify } = req.body
 
     if (username == "" || userpassword == "" || openpassword.length < 8 || userid == "" || useraddress == "" || usertel == "" || openpassword == "" || userpassword.length < 8 || checkidentify == "재시도") {
       res.redirect('/register')
     }
     else {
-      let Info = new User({
+      fs.readdir(__dirname, (err, file) =>{
+        let profile = file[file.length - 1]
+        console.log(profile)
+        
+        let Info = new User({
         username: username,
         userid: userid,
         userpassword: hashed_password,
         useraddress: useraddress,
-        openpassword: openpassword,
+        openpassword: hashed_op,
+        profile : profile,
         usertel: usertel,
         workstop: '0',
       })
       Info.save()
       res.redirect('/Login')
+    })
     }
   })
 
@@ -181,22 +191,6 @@ router
         })
       }
     })
-
-    /*
-    User.findONe({userid : id})
-    .then((user)=>{
-      if(user.useraddress == email){
-        User.findOneAndUpdate({userid : id}, {userpassword : hashed_password}, ()=>{
-          console.log(password)
-        })
-      }
-    })
-    .catch((err)=>{
-      if(err return JSON(err))
-    })
-    */
-
-
 
     //send mail
     const main = async () => {

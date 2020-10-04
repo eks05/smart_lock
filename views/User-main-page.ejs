@@ -383,7 +383,7 @@
     <script>
         alert('비밀번호를 변경해주세요')
         setTimeout(() => {
-            window.location.href = 'http://192.168.0.24:3000/changepw'
+            window.location.href = 'http://192.168.55.161:3000/changepw'
         }, 1000);
     </script>
     <% } %>
@@ -428,7 +428,7 @@
                             <div class="modal_child" id="modal_child_two">도어락 비밀번호 변경</div>
                             <div class="filebox center">
                                 <div id="foropen" class="row">
-                                    <input type="number" id="originpassword" name="origin"
+                                    <input type="text" id="originpassword" name="origin"
                                         class="input-field col s10 l10" placeholder="기존 비밀번호를 입력해주세요">
                                     <input type="number" id="svpassword" name="foropen" class="input-field col s10 l10"
                                         placeholder="숫자 8자를 입력해주세요">
@@ -444,7 +444,7 @@
                             <div class="modal_child" id="modal_child_two">계정 비밀번호 변경</div>
                             <div class='center'>
                                 <a class="waves-effect waves-light btn-small card-panel input-field" id='tocpw'
-                                    href="http://192.168.0.24:3000/changepw">이동</a>
+                                    href="http://192.168.55.161:3000/changepw">이동</a>
                             </div>
                         </div>
                     </div>
@@ -479,7 +479,7 @@
         </div>
         <div id='controler'><i class="large material-icons">play_arrow </i>
         </div>
-        <img src="http://192.168.0.24:8091/?action=stream" id="video_src" class="none">
+        <img src="http://192.168.55.161:8091/?action=stream" id="video_src" class="none">
     </div>
     <div class="row main">
         <div class="col l10 m-right s12">
@@ -496,7 +496,7 @@
             </div>
             <table class="check-img">
                 <thead class="view-more">
-                    <th id="time">24시간동안 무슨일이 있었지? <br> <span style="font-weight: normal; font-size:18px;">최근 →→→→→→→
+                    <th id="time">24시간동안 무슨일이 있었지? <br> <span style="font-weight: normal;">최근 →→→→→→→
                             지난시간</span></th>
                 </thead>
                 <tbody>
@@ -515,7 +515,7 @@
             </div>
             <div id='imcontroler' class="none"><i class="large material-icons">play_arrow </i>
             </div>
-            <img src="http://192.168.0.24:8091/?action=stream" id="imvideo_src" class="none">
+            <img src="http://192.168.55.161:8091/?action=stream" id="imvideo_src" class="none">
 
             <div class="stop">
                 <form action="/open/stopNrestart" method="POST" class="row">
@@ -553,7 +553,7 @@
         let svbtn = document.getElementById('svbtn')
         svbtn.addEventListener('click', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://192.168.0.24:3000/open/foropen')
+            xhr.open('POST', 'http://192.168.55.161:3000/open/foropen')
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.status === 200 && xhr.readyState === 4) {
@@ -576,11 +576,11 @@
             }
             else if (value == '사용가능') {
                 alert('변경되었습니다.')
-                window.location.href = 'http://192.168.0.24:3000/U-ViLock'
+                window.location.href = 'http://192.168.55.161:3000/U-ViLock'
             }
             else if (value == '기존 비밀번호가 틀렸습니다') {
                 alert('기존 비밀번호가 틀렸습니다')
-                window.location.href = 'http://192.168.0.24:3000/U-ViLock'
+                window.location.href = 'http://192.168.55.161:3000/U-ViLock'
             }
         }
         let idNemail = document.getElementById('infomation')
@@ -592,7 +592,7 @@
         }
         function gettries() {
             let xhr = new XMLHttpRequest()
-            xhr.open('GET', 'http://192.168.0.24:3000/chart/gettries')
+            xhr.open('GET', 'http://192.168.55.161:3000/chart/gettries')
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -639,7 +639,7 @@
         }
         document.getElementById('hidepassword').addEventListener('click', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open("POST", "http://192.168.0.24:3000/open/checkcheck")
+            xhr.open("POST", "http://192.168.55.161:3000/open/checkcheck")
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.status === 200 && xhr.readyState === 4) {
@@ -783,6 +783,8 @@
             svpassword.classList.add('none')
             document.getElementById('mobilesvpassword').classList.remove('none')
             document.getElementById('foropen').style.marginTop = '10%'
+            document.getElementById('t-tem').style.display = 'none'
+            document.getElementById('time').style.fontSize = '14px'
         }
 
         let controler = document.getElementById('controler')
@@ -836,7 +838,7 @@
 
         hidepassword.addEventListener('keyup', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://192.168.0.24:3000/open/img')
+            xhr.open('POST', 'http://192.168.55.161:3000/open/img')
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.status === 200 && xhr.readyState === 4) {

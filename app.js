@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
-const logger = require('morgan') // server to client 정보전달
+const logger = require('morgan') // server 정보로전달
 const multer = require('multer') // 파일선택
 const cookieParser = require('cookie-parser'); // 쿠키
 
@@ -10,7 +10,7 @@ const User = require('./models/User')
 const List = require('./models/userlist')
 const Vib = require('./models/Vib')
 
-require("pigpio").configureSocketPort(8293);
+require("pigpio").configureSocketPort(8298);
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -38,14 +38,15 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 //미들웨어 next를 통해 넘어감
 app.use(logger("dev"))
-app.use(express.json()) // req body 가능하게함
-app.use(express.urlencoded({ extended: false })) // req body 가능하게함
+//body-parser가 express에 내장되어 미들웨어 사용가능 
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: false })) 
 
 //이미지
-app.use(express.static(path.join(__dirname, '/public')))
-app.use("/public", express.static('public'));
-app.use('/uploads', express.static('uploads'))
-app.use('/stranger', express.static('stranger'))
+// app.use()
+app.use('/public',express.static(path.join(__dirname, '/public')));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+app.use('/stranger', express.static(path.join(__dirname, '/stranger')))
 
 
 app.use('/login', require('./routes/index')) //로그인 회원가입

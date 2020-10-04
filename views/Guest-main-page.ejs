@@ -174,7 +174,7 @@
 
     document.getElementById('findpassword').addEventListener('click',()=>{
         let xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://192.168.0.24:3000/login/findpassword')
+        xhr.open('POST', 'http://192.168.55.161:3000/login/findpassword')
         xhr.setRequestHeader("Content-Type", "application/json")
         xhr.onreadystatechange = ()=>{
             if(xhr.status ===200 && xhr.readyState === 4){
@@ -187,7 +187,7 @@
             id:document.getElementById('fid').value,
             email:document.getElementById('femail').value,
         }))
-        window.location.href = 'http://192.168.0.24:3000/'
+        window.location.href = 'http://192.168.55.161:3000/'
        })
 
     let address = document.getElementById('address')

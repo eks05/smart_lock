@@ -7,6 +7,8 @@ const googleTTS = require('google-tts-api');
 // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
 
 //소리의 속도 : 344 m/s
+// 1 마이크로초에 29cm
+
 const MICROSECDONDS_PER_CM = 1e6 / 34321;
 
 //크롤링
@@ -41,7 +43,7 @@ function playWeather(level, tick){
     const endTick = tick;
     const diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic  //도착시점 - 출발시점
     const distance = diff / 2 / MICROSECDONDS_PER_CM; //duration / 2 / 29
-    console.log(distance)
+    console.log(Math.floor(distance) + 'cm')
     if (distance <= 40 && isWeatherPlaying == false) {
       isWeatherPlaying = true;
       //크롤링

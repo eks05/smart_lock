@@ -9,23 +9,23 @@ const trigger = new PIGPIO(1, {
 
 
 trigger.on('alert', (level, tick) => {
+    console.log('level:', level, 'tick:', tick)
     if (level == 1) {
-        function take(){
-            let date = new Date()
-            execSync(`wget http://127.0.0.1:8091/?action=snapshot -O stranger/${filename}`)
-            .then(()=>{
-                let vib = new Vib({
-                    hours: Date.now(),
-                    time: date,
-                    filename: filename
-                })
-                vib.save().then(()=>{
-                    console.log('pir센서')
-                })
-            })    
-        }
+        take()
     }
 })
-
+function take(){
+    let date = new Date()
+    let filename = `${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}.jpg`
+    execSync(`wget http://127.0.0.1:8091/?action=snapshot -O stranger/${filename}`)
+        let vib = new Vib({
+            hours: Date.now(),
+            time: date,
+            filename: filename
+        })
+        vib.save().then(()=>{
+            console.log('pir센서')
+        })
+}
 console.log('running');
 
