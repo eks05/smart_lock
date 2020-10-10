@@ -20,7 +20,7 @@ router
     //digest : 인코딩, base64 가장 짧음
     let hashed_password = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.userpassword).digest('base64')
     let hashed_op = crypto.createHmac(config.crypto_key1, config.crypto_key2).update(req.body.openpassword).digest('base64')
-    let { username, userid, userpassword, useraddress, openpassword, usertel, checkidentify } = req.body
+    let { username, userid, userpassword, useraddress, openpassword, usertel, checkidentify, familyname } = req.body
 
     if (username == "" || userpassword == "" || openpassword.length < 8 || userid == "" || useraddress == "" || usertel == "" || openpassword == "" || userpassword.length < 8 || checkidentify == "재시도") {
       res.redirect('/register')
@@ -39,6 +39,7 @@ router
         profile : profile,
         usertel: usertel,
         workstop: '0',
+        familyname : familyname
       })
       Info.save()
       res.redirect('/Login')
@@ -138,7 +139,8 @@ router
             id: user.userid,
             address: user.useraddress,
             name: user.username, 
-            idx : idx
+            idx : idx,
+            familyname : user.familyname
           }
           if (date.getHours() >= 12) {
             let pm = '오후'

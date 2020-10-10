@@ -26,7 +26,6 @@ const upload = multer({ storage: storage })
 
 const app = express()
 
-app.use(cookieParser());
 
 //sensor
 require('./sensor/vib')()
@@ -36,9 +35,11 @@ require('./sensor/keypad')
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
+
 //미들웨어 next를 통해 넘어감
 app.use(logger("dev"))
 //body-parser가 express에 내장되어 미들웨어 사용가능 
+app.use(cookieParser());
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: false })) 
 
@@ -87,6 +88,7 @@ app.get('/U-ViLock', (req, res) => {
         return b.time < a.time ? -1 : 1;
       })
       User.findOne({ userid: req.cookies.Info.id }, (err, user) => {
+        User.find({familyname : user.familyname}, (err, users)=>{
           res.render('User-main-page', {
             name: username,
             id: user.userid,
@@ -95,11 +97,14 @@ app.get('/U-ViLock', (req, res) => {
             passingpic: pic,
             hour: time,
             idx : req.cookies.Info.idx, //임시 비밀번호 확인
+            familyname : user.familyname,
+            familymem : users.map(el => el.username)
           })
         if (err) {
           res.status(500).send('err')
         }
       })
+    })
     })
   })
 })
@@ -114,6 +119,7 @@ app.get('/ChangePw', (req, res)=>{
   res.render('C-password')
 })
 
+//3000번 포트로 서브를 연다
 app.listen(3000, () => {
   console.log('running')
 })

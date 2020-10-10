@@ -101,15 +101,23 @@ router
   //keypad stop & restart
   .post('/stopNrestart', (req, res) => {
     let stopNrestart = req.body.stopNrestart
-    let userid = req.cookies.Info.id
+    let familyname = req.cookies.Info.familyname
     if (stopNrestart == '정지') {
-      User.findOneAndUpdate({ userid: userid }, { workstop: '1' }, () => {
-        console.log('stop')
+      User.find({familyname : familyname}, (err, users)=>{
+        for(let i=0;i<users.length;i++){
+          User.findOneAndUpdate({userid :users[i].userid}, {workstop : '1'}, ()=>{
+            console.log('성공') 
+          })
+        }
       })
     }
     else if (stopNrestart == '재가동') {
-      User.findOneAndUpdate({ userid: userid }, { workstop: '0' }, () => {
-        console.log('restart')
+      User.find({familyname : familyname}, (err, users)=>{
+        for(let i=0;i<users.length;i++){
+          User.findOneAndUpdate({userid :users[i].userid}, {workstop : '0'}, ()=>{
+            console.log('성공')
+          })
+        }
       })
     }
     res.redirect('/U-ViLock')

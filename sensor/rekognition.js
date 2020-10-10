@@ -7,7 +7,6 @@ const secretKey = "R+nncrCI0oH0rXYOT7cyKEvZrNzsA6ievLWoDvMh";
 const { execSync, exec } = require('child_process');
 
 const List = require('../models/userlist')
-const VibModel = require('../models/Vib')
 
 const sv1 = new PIGPIO(3, {
     mode: PIGPIO.OUTPUT

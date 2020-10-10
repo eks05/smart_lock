@@ -6,10 +6,6 @@ const googleTTS = require('google-tts-api');
 
 // The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
 
-//소리의 속도 : 344 m/s
-// 1 마이크로초에 29cm
-
-const MICROSECDONDS_PER_CM = 1e6 / 34321;
 
 //크롤링
 const options = {
@@ -21,16 +17,13 @@ const options = {
 var trigger, echo;
 
 function init(){
-
   trigger = new Gpio(23, { mode: Gpio.OUTPUT });
-  echo = new Gpio(24, { mode: Gpio.INPUT, alert: true });
-
-  trigger.digitalWrite(0); // Make sure trigger is low
+  echo = new Gpio(24, 
+    { mode: Gpio.INPUT, alert: true });
+  trigger.digitalWrite(0); 
   echo.on('alert', playWeather);
-
-  // Trigger a distance measurement once per second
   setInterval(() => {
-    trigger.trigger(10, 1); // Set trigger high for 10 microseconds
+    trigger.trigger(10, 1);
   }, 1000);
 }
 
@@ -42,7 +35,8 @@ function playWeather(level, tick){
   } else {
     const endTick = tick;
     const diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic  //도착시점 - 출발시점
-    const distance = diff / 2 / MICROSECDONDS_PER_CM; //duration / 2 / 29
+    //소리의 속도 : 344 m/s
+    const distance = (340 * diff) / 20000
     console.log(Math.floor(distance) + 'cm')
     if (distance <= 40 && isWeatherPlaying == false) {
       isWeatherPlaying = true;
@@ -56,7 +50,7 @@ function playWeather(level, tick){
         var $ = cheerio.load(html);
         let cel = $(".todaytemp")[0].children[0].data + '도씨'
         let cast = $(".cast_txt")[0].children[0].data
-        googleTTS(cel + cast, 'ko', 1)   // speed normal = 1 (default), slow = 0.24
+        googleTTS(cel + cast, 'ko', 1)
           .then(function (url) {
             console.log(url)
             exec(

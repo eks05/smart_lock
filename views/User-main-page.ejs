@@ -372,7 +372,9 @@
         #tocpw {
             background-color: #353866;
             font-weight: bold;
-
+        }
+        #familyname{
+            cursor:pointer
         }
     </style>
 </head>
@@ -383,7 +385,7 @@
     <script>
         alert('비밀번호를 변경해주세요')
         setTimeout(() => {
-            window.location.href = 'http://192.168.55.161:3000/changepw'
+            window.location.href = 'http://192.168.0.24:3000/changepw'
         }, 1000);
     </script>
     <% } %>
@@ -395,7 +397,10 @@
                     </a></li>
                 <li><span id="infomation">
                         <label for="">ID_email</label>
-                        <%= id %>_<%= address%>
+                        <%= id %>_<%= address%> 
+                        <label for="">가족</label>
+                        <span id="familyname"><%= familyname %></span>
+                        <span class="none" id="mem">(<%= familymem %>)</span>
                     </span></li>
                 <li>
                     <div id="modal2" class="modal">
@@ -420,15 +425,18 @@
             </ul>
             <ul class='right' id='setting'>
                 <li><a id="t-tem"></a></li>
-                <li><a class="waves-effect waves-light modal-trigger" href="#modal1"><i
-                            class="material-icons nav-content right" id="save-password">settings</i></a></li>
+                <li>
+                    <a class="waves-effect waves-light modal-trigger" href="#modal1">
+                        <i class="material-icons nav-content right" id="save-password">settings</i>
+                    </a>
+                </li>
                 <li>
                     <div id="modal1" class="modal">
                         <div class="modal-content black-text">
                             <div class="modal_child" id="modal_child_two">도어락 비밀번호 변경</div>
                             <div class="filebox center">
                                 <div id="foropen" class="row">
-                                    <input type="text" id="originpassword" name="origin"
+                                    <input type="number" id="originpassword" name="origin"
                                         class="input-field col s10 l10" placeholder="기존 비밀번호를 입력해주세요">
                                     <input type="number" id="svpassword" name="foropen" class="input-field col s10 l10"
                                         placeholder="숫자 8자를 입력해주세요">
@@ -444,7 +452,7 @@
                             <div class="modal_child" id="modal_child_two">계정 비밀번호 변경</div>
                             <div class='center'>
                                 <a class="waves-effect waves-light btn-small card-panel input-field" id='tocpw'
-                                    href="http://192.168.55.161:3000/changepw">이동</a>
+                                    href="http://192.168.0.24:3000/changepw">이동</a>
                             </div>
                         </div>
                     </div>
@@ -479,7 +487,8 @@
         </div>
         <div id='controler'><i class="large material-icons">play_arrow </i>
         </div>
-        <img src="http://192.168.55.161:8091/?action=stream" id="video_src" class="none">
+        <img src="http://192.168.0.24:8091/?action=stream" id="video_src" class="none">
+
     </div>
     <div class="row main">
         <div class="col l10 m-right s12">
@@ -515,7 +524,7 @@
             </div>
             <div id='imcontroler' class="none"><i class="large material-icons">play_arrow </i>
             </div>
-            <img src="http://192.168.55.161:8091/?action=stream" id="imvideo_src" class="none">
+            <img src="http://192.168.0.24:8091/?action=stream" id="imvideo_src" class="none">
 
             <div class="stop">
                 <form action="/open/stopNrestart" method="POST" class="row">
@@ -542,18 +551,19 @@
     <script>
         let infomation
         let idinfo
-
         function maxLengthCheck(object) {
             if (object.value.length > object.maxLength) {
                 object.value = object.value.slice(0, object.maxLength);
             }
         }
+
+        //도어락 비밀번호 변경
         let svpassword = document.getElementById('svpassword')
         let mobilesvpassword = document.getElementById('mobilesvpassword')
         let svbtn = document.getElementById('svbtn')
         svbtn.addEventListener('click', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://192.168.55.161:3000/open/foropen')
+            xhr.open('POST', 'http://192.168.0.24:3000/open/foropen')
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.status === 200 && xhr.readyState === 4) {
@@ -569,20 +579,20 @@
                 mobileoriginpassword: document.getElementById('mobileoriginpassword').value
             }))
         })
-
         function avail(value) {
             if (value == '사용불가능') {
                 alert('사용불가능합니다.')
             }
             else if (value == '사용가능') {
                 alert('변경되었습니다.')
-                window.location.href = 'http://192.168.55.161:3000/U-ViLock'
+                window.location.href = 'http://192.168.0.24:3000/U-ViLock'
             }
             else if (value == '기존 비밀번호가 틀렸습니다') {
                 alert('기존 비밀번호가 틀렸습니다')
-                window.location.href = 'http://192.168.55.161:3000/U-ViLock'
+                window.location.href = 'http://192.168.0.24:3000/U-ViLock'
             }
         }
+
         let idNemail = document.getElementById('infomation')
         window.onload = () => {
             weather()
@@ -590,9 +600,11 @@
             infomation = idNemail.innerHTML
             idinfo = infomation.split('_')[1].split('>')[1].split(' ')[24]
         }
+
+        //차트 그리기
         function gettries() {
             let xhr = new XMLHttpRequest()
-            xhr.open('GET', 'http://192.168.55.161:3000/chart/gettries')
+            xhr.open('GET', 'http://192.168.0.24:3000/chart/gettries')
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -604,7 +616,6 @@
             xhr.send()
         }
         function chart(tries, wtries) {
-
             console.log(tries.t13, tries.t46, tries.t79, tries.t1012, tries.t1315, tries.t1618, tries.t1921, tries.t2224)
             console.log(wtries.w13, wtries.w46, wtries.w79, wtries.w1012, wtries.w1315, wtries.w1618, wtries.w1921, wtries.w2224)
             var ctx = document.getElementById("myChart").getContext("2d");
@@ -637,9 +648,11 @@
                 }
             });
         }
+
+        //키패드 작동여부 알림
         document.getElementById('hidepassword').addEventListener('click', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open("POST", "http://192.168.55.161:3000/open/checkcheck")
+            xhr.open("POST", "http://192.168.0.24:3000/open/checkcheck")
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.status === 200 && xhr.readyState === 4) {
@@ -675,16 +688,11 @@
             }
         }
 
+        
         svpassword.addEventListener("keyup", remove)
         document.getElementById('hidepassword').addEventListener('keyup', remove)
 
-        svpassword.addEventListener('keyup', function () {
-            let value = this.value
-            if (value.length > 8)
-                value = value.substr(0, 8)
-
-            this.value = value
-        })
+        svpassword.addEventListener('keyup', remove)
 
         function remove() {
             let value = this.value;
@@ -696,13 +704,7 @@
 
         }
 
-        $(document).ready(function () {
-            $('.sidenav').sidenav();
-        });
-        $(document).ready(function () {
-            $('.modal').modal();
-        });
-
+        //현재온도 알림
         let today_date = document.getElementById("today-date")
         let date = new Date()
         let time = document.getElementById('time')
@@ -744,6 +746,7 @@
             }
         })
 
+        
         keys.addEventListener('mouseover', () => {
             M.toast({ html: '키패드를 가동 또는 정지시킬 수 있습니다', displayLength: 1000 })
         })
@@ -838,7 +841,7 @@
 
         hidepassword.addEventListener('keyup', () => {
             let xhr = new XMLHttpRequest()
-            xhr.open('POST', 'http://192.168.55.161:3000/open/img')
+            xhr.open('POST', 'http://192.168.0.24:3000/open/img')
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = () => {
                 if (xhr.status === 200 && xhr.readyState === 4) {
@@ -886,7 +889,12 @@
             }
         })
 
-
+        document.getElementById('familyname').addEventListener('mouseover', ()=>{
+            mem.classList.remove('none')
+            setTimeout(() => {
+                mem.classList.add('none')
+            }, 2000);
+        })
     </script>
 </body>
 

@@ -26,7 +26,7 @@
       background-color: white;
       margin-bottom: 10px;
       margin-top: 10px;
-      height: 750px;
+      height: 850px;
     }
     .nav-wrapper {
       font-family: 'Song Myung', sans-serif;
@@ -120,6 +120,11 @@
           <input placeholder="사용자의 이름을 입력하세요" id="name" type="text" class="validate" name="username">
           <label for="Name">이름</label>
         </div>
+        <div class="input-field col s10 l11">
+          <input placeholder="가족끼리 통일한 가족의 이름을 입력해주세요" id="familyname" type="text" class="validate" name="familyname">
+          <label for="familyName">가족 이름 지정</label>
+        </div>
+
         <div class="input-field col l11 s10">
           <input placeholder="사용하실 아이디를 입력하세요" id="id" type="text" class="validate" name="userid">
           <label for="ID">ID</label>
@@ -317,9 +322,10 @@
       }
       else{
       let xhr = new XMLHttpRequest()
-      xhr.open('POST', 'http://192.168.55.161:3000/login/checkidNop')
+      xhr.open('POST', 'http://192.168.0.24:3000/login/checkidNop')
       xhr.setRequestHeader("Content-Type", "application/json")
       xhr.onreadystatechange = () => {
+        //Done == readystate 가 4
         if (xhr.readyState === 4 && xhr.status === 200) {
           let abs = JSON.parse(xhr.responseText).use
           change(abs)
@@ -362,7 +368,7 @@
       checkidentify.classList.remove('none')
       checkidentifyinput.parentElement.classList.remove('none')
       let xhr = new XMLHttpRequest()
-      xhr.open('POST', 'http://192.168.55.161:3000/login/sendidentify')
+      xhr.open('POST', 'http://192.168.0.24:3000/login/sendidentify')
       xhr.setRequestHeader("Content-Type", "application/json")
       xhr.onreadystatechange = ()=>{
         if(xhr.status === 200 && xhr.readyState === 4){
@@ -402,7 +408,7 @@
         }
         if(checktries == 5){
           window.location.href = 
-          'http://192.168.55.161:3000/register'
+          'http://192.168.0.24:3000/register'
         }
       }
     })
